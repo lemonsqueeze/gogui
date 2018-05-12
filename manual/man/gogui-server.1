@@ -1,0 +1,97 @@
+'\" t
+.\"     Title: gogui-server
+.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 05/12/2018
+.\"    Manual: GoGui Reference
+.\"    Source: GoGui 1.4.10
+.\"  Language: English
+.\"
+.TH "GOGUI\-SERVER" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+gogui-server \- Connects a Go program supporting Go Text Protocol to a socket\&.
+.SH "SYNOPSIS"
+.HP \w'\fBgogui\-server\fR\ 'u
+\fBgogui\-server\fR \fB\-port\fR\ \fIn\fR [\fB\-config\fR\ \fIfile\fR] [\fB\-loop\fR] [\fB\-remote\fR\ \fIhostname\fR] [\fB\-timeout\fR\ \fIsec\fR] [\fB\-user\fR\ \fIfile\fR] [\fB\-verbose\fR] \fIprogram\fR
+.HP \w'\fBgogui\-server\fR\ 'u
+\fBgogui\-server\fR \fB\-help\fR
+.HP \w'\fBgogui\-server\fR\ 'u
+\fBgogui\-server\fR \fB\-version\fR
+.SH "DESCRIPTION"
+.PP
+Runs a Go program supporting the Go Text Protocol by executing
+\fIprogram\fR, and connects its input and output to a listen socket on port number
+\fIport\fR
+of the local computer, so that other programs can connect to it from the network\&. If the option
+\fB\-remote\fR
+is used, an connection to another host is made, instead of waiting for incoming connections\&.
+.SH "OPTIONS"
+.PP
+\fB\-config\fR \fIfile\fR
+.RS 4
+Read command line options and arguments from the given file\&.
+.RE
+.PP
+\fB\-help\fR
+.RS 4
+Display help and exit\&.
+.RE
+.PP
+\fB\-loop\fR
+.RS 4
+After connection is finished, restart the program and wait for next connection\&.
+.RE
+.PP
+\fB\-port\fR \fIn\fR
+.RS 4
+Port number to use for the socket\&.
+.RE
+.PP
+\fB\-remote\fR \fIhostname\fR
+.RS 4
+Connect to a remote host, instead of waiting for incoming connections\&. See also
+\fB\-user\fR\&.
+.RE
+.PP
+\fB\-timeout\fR \fIseconds\fR
+.RS 4
+Close connections if no command has been received for a number of seconds\&. Default is zero, which means no timeout\&.
+.RE
+.PP
+\fB\-user\fR \fIfile\fR
+.RS 4
+If the option
+\fB\-remote\fR
+is used, and the remote program requires that any connecting program sends some plain text login information before waiting for commands, then this option can be used\&. The argument is a filename; the content of this file is sent verbatim to the remote computer\&.
+.RE
+.PP
+\fB\-verbose\fR
+.RS 4
+Print debugging messages\&.
+.RE
+.PP
+\fB\-version\fR
+.RS 4
+Print version and exit\&.
+.RE
+.PP
+

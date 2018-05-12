@@ -1,0 +1,92 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>gogui-dummy</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="appendix-reference.html" title="Appendix A. Reference"><link rel="prev" href="reference-display.html" title="gogui-display"><link rel="next" href="reference-regress.html" title="gogui-regress"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">gogui-dummy</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="reference-display.html">Prev</a> </td><th width="60%" align="center">Appendix A. Reference</th><td width="20%" align="right"> <a accesskey="n" href="reference-regress.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="reference-dummy"></a><div class="titlepage"></div><div class="refnamediv"><h2><span class="refentrytitle">gogui-dummy</span></h2><p>gogui-dummy — 
+Dummy Go program for testing GTP controllers.
+</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">gogui-dummy</code>  [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-log</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-resign</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-srand</code> <em class="replaceable"><code>seed</code></em>]</p></div><div class="cmdsynopsis"><p><code class="command">gogui-dummy</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-dummy</code>   <code class="option">-version</code> </p></div></div><div class="refsection"><a name="idp1275336484"></a><h2>Description</h2><p>
+Dummy Go program supporting GTP (Go Text Protocol) for testing
+GTP controllers.
+Plays random moves.
+Never plays at a point at which already a move was made, even
+after the point becomes free again because of capture.
+Illegal moves sent to the program are not checked; they are always accepted.
+</p></div><div class="refsection"><a name="idp1275337364"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<code class="option">-config</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Read command line options and arguments from the given file.
+</p></dd><dt><span class="term"><code class="option">-help</code></span></dt><dd><p>
+Print help and exit.
+</p></dd><dt><span class="term"><code class="option">-log</code> <em class="replaceable"><code>file</code></em></span></dt><dd><p>
+Log GTP stream to file.
+</p></dd><dt><span class="term"><code class="option">-resign</code> <em class="replaceable"><code>n</code></em></span></dt><dd><p>
+Resign at the n<sup>th</sup> genmove command after the game
+started.
+</p></dd><dt><span class="term"><code class="option">-srand</code> <em class="replaceable"><code>seed</code></em></span></dt><dd><p>
+Set the random seed for random move generation.
+</p></dd><dt><span class="term"><code class="option">-version</code></span></dt><dd><p>
+Print version and exit.
+</p></dd></dl></div></div><div class="refsection"><a name="idp1275344148"></a><h2>GTP Extensions</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="command"><strong>gogui-dummy-bwboard</strong></span></span></dt><dd><p>
+Output a board randomly filled with "B" and "W".
+</p></dd><dt><span class="term"><span class="command"><strong>gogui-dummy-crash</strong></span></span></dt><dd><p>
+Exit the program with return code -1.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-delay <em class="replaceable"><code>seconds</code></em></strong></span>
+</span></dt><dd><p>
+Delay the response to every command.
+An argument of 0 switches of the delay again.
+If no argument is given, the current delay value is returned.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-eplist</strong></span>
+</span></dt><dd><p>
+Command according to the eplist analyze command type in GoGui.
+The arguments can be a point list, which is remembered.
+If the argument is "show", the current point list is shown.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-file_open</strong></span>
+</span></dt><dd><p>
+For testing the file open analyze command wildcard.
+Takes a filename argument and returns some information about this file.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-file_save</strong></span>
+</span></dt><dd><p>
+For testing the file save analyze command wildcard.
+Takes a filename argument and writes a test string into the file.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-gfx</strong></span>
+</span></dt><dd><p>
+Command for testing the gfx analyze return type of GoGui.
+</p></dd><dt><span class="term"><span class="command"><strong>gogui-dummy-invalid</strong></span></span></dt><dd><p>
+Print an invalid GTP response which does not start with a status character.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-live_gfx</strong></span>
+</span></dt><dd><p>
+Command for testing live graphics in GoGui.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-long_response <em class="replaceable"><code>n</code></em></strong></span>
+</span></dt><dd><p>
+Print a GTP response with n lines.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-next_failure <em class="replaceable"><code>response</code></em>
+</strong></span>
+</span></dt><dd><p>
+Let the next command fail with the given response.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-next_success <em class="replaceable"><code>response</code></em>
+</strong></span>
+</span></dt><dd><p>
+Let the next command succeed with the given response.
+</p></dd><dt><span class="term"><span class="command"><strong>gogui-dummy-sboard</strong></span></span></dt><dd><p>
+Command for testing GoGui's analyze command type 'sboard'.
+Returns a board of strings.
+</p></dd><dt><span class="term">
+<span class="command"><strong>gogui-dummy-sleep <em class="replaceable"><code>seconds</code></em>
+</strong></span>
+</span></dt><dd><p>
+Sleep for a number of seconds (default 20).
+This command can be interrupted.
+</p></dd><dt><span class="term"><span class="command"><strong>echo</strong></span></span></dt><dd><p>
+Print the argument as response.
+</p></dd><dt><span class="term"><span class="command"><strong>echo_err</strong></span></span></dt><dd><p>
+Print the argument to standard error.
+</p></dd><dt><span class="term"><span class="command"><strong>gogui-interrupt</strong></span></span></dt><dd><p>
+Indicate interrupt ability for GoGui.
+</p></dd></dl></div><p>
+
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="reference-display.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="appendix-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="reference-regress.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">gogui-display </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> gogui-regress</td></tr></table></div></body></html>

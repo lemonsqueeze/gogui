@@ -1,0 +1,71 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>gogui-regress</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="appendix-reference.html" title="Appendix A. Reference"><link rel="prev" href="reference-dummy.html" title="gogui-dummy"><link rel="next" href="reference-server.html" title="gogui-server"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">gogui-regress</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="reference-dummy.html">Prev</a> </td><th width="60%" align="center">Appendix A. Reference</th><td width="20%" align="right"> <a accesskey="n" href="reference-server.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="reference-regress"></a><div class="titlepage"></div><div class="refnamediv"><h2><span class="refentrytitle">gogui-regress</span></h2><p>gogui-regress — 
+Runs GTP regression tests.
+</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">gogui-regress</code>  [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-gtpfile</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-long</code>] [<code class="option">-output</code> <em class="replaceable"><code>directory</code></em>] [<code class="option">-verbose</code>]  <em class="replaceable"><code>program</code></em>   
+<em class="replaceable"><code>test.tst</code></em>
+... </p></div><div class="cmdsynopsis"><p><code class="command">gogui-regress</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-regress</code>   <code class="option">-version</code> </p></div></div><div class="refsection"><a name="idp1275416124"></a><h2>Description</h2><p>
+Runs a list of regression tests for a Go program supporting the Go Text
+Protocol, and formats the output as HTML.
+The regression tests are GTP files, which use the special comment
+<strong class="userinput"><code>#?</code></strong>, as used for the
+<a class="ulink" href="http://www.gnu.org/software/gnugo/gnugo.html" target="_top">GNU Go</a>
+regression tests (see section
+<a class="ulink" href="http://www.gnu.org/software/gnugo/gnugo_20.html#SEC205" target="_top">
+Regression testing</a> of the GNU Go documentation).
+The regular expression syntax for the expected responses is
+mostly compatible to the one used by the GNU Go regression test suite,
+see the documentation for
+<a class="ulink" href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">java.util.regex.Pattern</a>
+for a complete description.
+</p><p>
+Test names that start with a '@' are interpreted as files containing a test
+suite. The file with the corresponding name (excluding the '@') is read
+and every non-empty line that does not start with the comment character '#'
+is added to the list of test names. The files are allowed to contain names
+of other test suites.
+</p><p>
+The main output file is <code class="filename">index.html</code>.
+For each test file
+<code class="filename"><em class="replaceable"><code>test</code></em>.tst</code>,
+additional files with name
+<code class="filename"><em class="replaceable"><code>test</code></em>.html</code> and
+<code class="filename"><em class="replaceable"><code>test</code></em>.out.html</code>
+are generated.
+Additionally, a text file <code class="filename">summary.dat</code> is generated,
+with a table row containing the most important summary statistics.
+gogui-regress will start a new instance of the Go program for each test and
+use the directory of the test file as the working directory for the Go
+program.
+</p><p>
+The return value of gogui-regress is 0, if all tests
+completed successfully with no unexpected fails, 1 if there was at
+least one unexpected fail, and 2 if the Go program crashed or some other
+error occurred.
+</p></div><div class="refsection"><a name="idp1275421900"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<code class="option">-config</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Read command line options and arguments from the given file.
+</p></dd><dt><span class="term">
+<code class="option">-gtpfile</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+File with GTP commands to execute before each test. This file can be used
+to configure engine parameters. If a command from the file fails, the program
+will exit with an error message.
+</p></dd><dt><span class="term">
+<code class="option">-help</code>
+</span></dt><dd><p>
+Display help and exit.
+</p></dd><dt><span class="term"><code class="option">-long</code></span></dt><dd><p>
+Print longer output to standard output, one line per test.
+</p></dd><dt><span class="term">
+<code class="option">-output</code> <em class="replaceable"><code>directory</code></em>
+</span></dt><dd><p>
+Write output files to the given directory.
+</p></dd><dt><span class="term"><code class="option">-verbose</code></span></dt><dd><p>
+Print the GTP stream to the Go program to standard error.
+</p></dd><dt><span class="term">
+<code class="option">-version</code>
+</span></dt><dd><p>
+Print version and exit.
+</p></dd></dl></div><p>
+
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="reference-dummy.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="appendix-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="reference-server.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">gogui-dummy </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> gogui-server</td></tr></table></div></body></html>

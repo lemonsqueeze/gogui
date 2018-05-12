@@ -1,0 +1,161 @@
+'\" t
+.\"     Title: gogui-dummy
+.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 05/12/2018
+.\"    Manual: GoGui Reference
+.\"    Source: GoGui 1.4.10
+.\"  Language: English
+.\"
+.TH "GOGUI\-DUMMY" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+gogui-dummy \- Dummy Go program for testing GTP controllers\&.
+.SH "SYNOPSIS"
+.HP \w'\fBgogui\-dummy\fR\ 'u
+\fBgogui\-dummy\fR [\fB\-config\fR\ \fIfile\fR] [\fB\-log\fR\ \fIfile\fR] [\fB\-resign\fR\ \fIn\fR] [\fB\-srand\fR\ \fIseed\fR]
+.HP \w'\fBgogui\-dummy\fR\ 'u
+\fBgogui\-dummy\fR \fB\-help\fR
+.HP \w'\fBgogui\-dummy\fR\ 'u
+\fBgogui\-dummy\fR \fB\-version\fR
+.SH "DESCRIPTION"
+.PP
+Dummy Go program supporting GTP (Go Text Protocol) for testing GTP controllers\&. Plays random moves\&. Never plays at a point at which already a move was made, even after the point becomes free again because of capture\&. Illegal moves sent to the program are not checked; they are always accepted\&.
+.SH "OPTIONS"
+.PP
+\fB\-config\fR \fIfile\fR
+.RS 4
+Read command line options and arguments from the given file\&.
+.RE
+.PP
+\fB\-help\fR
+.RS 4
+Print help and exit\&.
+.RE
+.PP
+\fB\-log\fR \fIfile\fR
+.RS 4
+Log GTP stream to file\&.
+.RE
+.PP
+\fB\-resign\fR \fIn\fR
+.RS 4
+Resign at the nth
+genmove command after the game started\&.
+.RE
+.PP
+\fB\-srand\fR \fIseed\fR
+.RS 4
+Set the random seed for random move generation\&.
+.RE
+.PP
+\fB\-version\fR
+.RS 4
+Print version and exit\&.
+.RE
+.SH "GTP EXTENSIONS"
+.PP
+\fBgogui\-dummy\-bwboard\fR
+.RS 4
+Output a board randomly filled with "B" and "W"\&.
+.RE
+.PP
+\fBgogui\-dummy\-crash\fR
+.RS 4
+Exit the program with return code \-1\&.
+.RE
+.PP
+\fBgogui\-dummy\-delay \fR\fB\fIseconds\fR\fR
+.RS 4
+Delay the response to every command\&. An argument of 0 switches of the delay again\&. If no argument is given, the current delay value is returned\&.
+.RE
+.PP
+\fBgogui\-dummy\-eplist\fR
+.RS 4
+Command according to the eplist analyze command type in GoGui\&. The arguments can be a point list, which is remembered\&. If the argument is "show", the current point list is shown\&.
+.RE
+.PP
+\fBgogui\-dummy\-file_open\fR
+.RS 4
+For testing the file open analyze command wildcard\&. Takes a filename argument and returns some information about this file\&.
+.RE
+.PP
+\fBgogui\-dummy\-file_save\fR
+.RS 4
+For testing the file save analyze command wildcard\&. Takes a filename argument and writes a test string into the file\&.
+.RE
+.PP
+\fBgogui\-dummy\-gfx\fR
+.RS 4
+Command for testing the gfx analyze return type of GoGui\&.
+.RE
+.PP
+\fBgogui\-dummy\-invalid\fR
+.RS 4
+Print an invalid GTP response which does not start with a status character\&.
+.RE
+.PP
+\fBgogui\-dummy\-live_gfx\fR
+.RS 4
+Command for testing live graphics in GoGui\&.
+.RE
+.PP
+\fBgogui\-dummy\-long_response \fR\fB\fIn\fR\fR
+.RS 4
+Print a GTP response with n lines\&.
+.RE
+.PP
+\fBgogui\-dummy\-next_failure \fR\fB\fIresponse\fR\fR\fB \fR
+.RS 4
+Let the next command fail with the given response\&.
+.RE
+.PP
+\fBgogui\-dummy\-next_success \fR\fB\fIresponse\fR\fR\fB \fR
+.RS 4
+Let the next command succeed with the given response\&.
+.RE
+.PP
+\fBgogui\-dummy\-sboard\fR
+.RS 4
+Command for testing GoGui\*(Aqs analyze command type \*(Aqsboard\*(Aq\&. Returns a board of strings\&.
+.RE
+.PP
+\fBgogui\-dummy\-sleep \fR\fB\fIseconds\fR\fR\fB \fR
+.RS 4
+Sleep for a number of seconds (default 20)\&. This command can be interrupted\&.
+.RE
+.PP
+\fBecho\fR
+.RS 4
+Print the argument as response\&.
+.RE
+.PP
+\fBecho_err\fR
+.RS 4
+Print the argument to standard error\&.
+.RE
+.PP
+\fBgogui\-interrupt\fR
+.RS 4
+Indicate interrupt ability for GoGui\&.
+.RE
+.PP
+

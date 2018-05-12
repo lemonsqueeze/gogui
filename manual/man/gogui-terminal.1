@@ -1,0 +1,123 @@
+'\" t
+.\"     Title: gogui-terminal
+.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 05/12/2018
+.\"    Manual: GoGui Reference
+.\"    Source: GoGui 1.4.10
+.\"  Language: English
+.\"
+.TH "GOGUI\-TERMINAL" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+gogui-terminal \- Simple text based interface to Go programs supporting GTP\&.
+.SH "SYNOPSIS"
+.HP \w'\fBgogui\-terminal\fR\ 'u
+\fBgogui\-terminal\fR [\fB\-config\fR\ \fIfile\fR] [\fB\-color\fR] [\fB\-size\fR\ \fIn\fR] [\fB\-verbose\fR] \fIprogram\fR
+.HP \w'\fBgogui\-terminal\fR\ 'u
+\fBgogui\-terminal\fR \fB\-help\fR
+.HP \w'\fBgogui\-terminal\fR\ 'u
+\fBgogui\-terminal\fR \fB\-version\fR
+.SH "DESCRIPTION"
+.PP
+Simple text based interface to Go programs supporting the Go Text Protocol\&. The argument
+\fIprogram\fR
+is a command line for the Go program \&. The interface keeps track of the board and prints it after each change on the board\&. If a move (coordinate on the board or pass) is entered, it is played on the board for the color to move, followed by a
+\fBgenmove\fR
+command sent to the program\&. Other supported commands are:
+.PP
+\fBgenmove\fR
+.RS 4
+Send a
+\fBgenmove\fR
+command for the color to move to the program\&.
+.RE
+.PP
+\fBhelp\fR
+.RS 4
+Print help\&.
+.RE
+.PP
+\fBlist\fR
+.RS 4
+Send a
+\fBlist_commands\fR
+command to the program\&.
+.RE
+.PP
+\fBload\fR
+.RS 4
+Load game from a SGF file\&. Moves are translated into
+\fBplay\fR
+commands for the program\&.
+.RE
+.PP
+\fBnewgame [size]\fR
+.RS 4
+Start a new game with a given board size\&.
+.RE
+.PP
+\fBsave\fR
+.RS 4
+Save game to file in SGF format\&.
+.RE
+.PP
+\fBundo\fR
+.RS 4
+Send a
+\fBundo\fR
+command to the program\&.
+.RE
+.PP
+\fBquit\fR
+.RS 4
+Terminate program and exit\&.
+.RE
+.PP
+GTP commands that change the board state are not allowed\&. Other GTP commands are forwarded to the program\&.
+.SH "OPTIONS"
+.PP
+\fB\-config\fR \fIfile\fR
+.RS 4
+Read command line options and arguments from the given file\&.
+.RE
+.PP
+\fB\-color\fR
+.RS 4
+Colorize text output of the Go board using ANSI escape sequences\&.
+.RE
+.PP
+\fB\-size\fR \fIn\fR
+.RS 4
+Board size\&.
+.RE
+.PP
+\fB\-verbose\fR
+.RS 4
+Log GTP stream to standard error\&.
+.RE
+.PP
+\fB\-version\fR
+.RS 4
+Print version and exit\&.
+.RE
+.PP
+

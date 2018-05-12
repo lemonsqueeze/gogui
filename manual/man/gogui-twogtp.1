@@ -1,0 +1,460 @@
+'\" t
+.\"     Title: gogui-twogtp
+.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 05/12/2018
+.\"    Manual: GoGui Reference
+.\"    Source: GoGui 1.4.10
+.\"  Language: English
+.\"
+.TH "GOGUI\-TWOGTP" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+gogui-twogtp \- Go Text Protocol adapter for playing games between two Go programs\&.
+.SH "SYNOPSIS"
+.HP \w'\fBgogui\-twogtp\fR\ 'u
+\fBgogui\-twogtp\fR \fB\-black\fR\ \fIcommand\fR \fB\-white\fR\ \fIcommand\fR [\fB\-alternate\fR] [\fB\-auto\fR] [\fB\-config\fR\ \fIfile\fR] [\fB\-debugtocomment\fR] [\fB\-force\fR] [\fB\-games\fR\ \fIn\fR] [\fB\-komi\fR\ \fIkomi\fR] [\fB\-maxmoves\fR\ \fIn\fR] [\fB\-observer\fR\ \fIcommand\fR] [\fB\-openings\fR\ \fIdir\fR] [\fB\-referee\fR\ \fIcommand\fR] [\fB\-sgffile\fR\ \fIprefix\fR] [\fB\-size\fR\ \fIn\fR] [\fB\-threads\fR\ \fIn\fR] [\fB\-time\fR\ \fItimespec\fR] [\fB\-verbose\fR] [\fB\-xml\fR]
+.HP \w'\fBgogui\-twogtp\fR\ 'u
+\fBgogui\-twogtp\fR \fB\-help\fR
+.HP \w'\fBgogui\-twogtp\fR\ 'u
+\fBgogui\-twogtp\fR \fB\-analyze\fR \fIfile\&.dat\fR [\fB\-force\fR]
+.HP \w'\fBgogui\-twogtp\fR\ 'u
+\fBgogui\-twogtp\fR \fB\-compare\fR \fIfile\&.sgf\fR...
+.HP \w'\fBgogui\-twogtp\fR\ 'u
+\fBgogui\-twogtp\fR \fB\-version\fR
+.SH "DESCRIPTION"
+.PP
+Adapter program for playing games between two Go programs supporting GTP (Go Text Protocol)\&.
+.PP
+Optional observer and referee GTP Go programs can be used for observing the game and answering commands related to the final game score\&.
+TwoGtp
+forwards the following commands to all programs (command translation is done for protocol version 1 programs):
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBboardsize\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBclear_board\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBkomi\fR
+(if supported)
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBplay\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBquit\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBscoring_system\fR
+(if supported)
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBtime_settings\fR
+(if supported)
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBundo\fR
+.RE
+.sp
+The following commands are forwarded to the referee program, if existing, otherwise to first player program that implements them (Black is tried first):
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBfinal_score\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBfinal_status\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBfinal_status_list\fR
+.RE
+.sp
+The command
+\fBgenmove\fR
+is forwarded only to the program of the corresponding color, the other programs are informed about the move with a
+\fBplay\fR
+command\&. GTP extension commands implemented by exactly one of the programs are forwarded to the program\&. The special comment line
+\fB#\ \&interrupt\fR, used by
+GoGui
+to interrupt commands, is forwarded to all programs\&.
+.PP
+If the option
+\fB\-sgffile\fR
+is used, the games are saved after they are finished and a result text file in table format is created with some statistics\&. If the program(s) support the GTP command
+\fBcputime\fR, these statistics include CPU times\&. The errors in the statistics are the standard errors (confidence interval 68%)\&. They are computed by the standard deviation of the results, divided by the square root of the number of unique games, which is correct only for a sufficiently large number of games (especially if the percentage of wins is close to 0% or 100%)\&.
+.SH "OPTIONS"
+.PP
+\fB\-alternate\fR
+.RS 4
+Alternate colors\&. Black and White are exchanged every odd game; the scores saved in the results table
+\fB\-sgffile\fR
+are still using the name Black and White as given with
+\fB\-black\fR
+and
+\fB\-white\fR\&.
+.RE
+.PP
+\fB\-analyze\fR \fIfile\&.dat\fR
+.RS 4
+Analyze the result file
+\fIfile\&.dat\fR\&. Creates a HTML file
+\fIfile\&.html\fR
+with links to the games and summary statistics\&. Also creates a text file
+\fIfile\&.summary\&.dat\fR, with a table row containing the most important summary statistics\&.
+.RE
+.PP
+\fB\-auto\fR
+.RS 4
+Automatically play games\&. Use this option if you want to run
+TwoGtp
+as a standalone program, without a program like
+GoGui
+which controls the move generation with
+\fBgenmove\fR
+commands\&. If a result file already exists (as specified with
+\fB\-sgffile\fR) and contains less games than specified with
+\fB\-games\fR, the remaining games will be played\&. Use
+\fB\-force\fR
+to overwrite existing result files\&.
+.RE
+.PP
+\fB\-black\fR \fIcommand\fR
+.RS 4
+Command for the black program\&.
+.RE
+.PP
+\fB\-compare\fR
+.RS 4
+Compare a list of SGF files given as arguments an exit\&.
+.RE
+.PP
+\fB\-config\fR \fIfile\fR
+.RS 4
+Read command line options and arguments from the given file\&.
+.RE
+.PP
+\fB\-force\fR
+.RS 4
+Overwrite existing files\&.
+.RE
+.PP
+\fB\-debugtocomment\fR
+.RS 4
+Store all text that was written by each program to the standard error stream during the move generation in the comment properties of the SGF file\&.
+.RE
+.PP
+\fB\-games\fR \fIn\fR
+.RS 4
+Number of games to play (0 means no limit)\&.
+.RE
+.PP
+\fB\-help\fR
+.RS 4
+Display help and exit\&.
+.RE
+.PP
+\fB\-komi\fR \fIkomi\fR
+.RS 4
+Komi\&. If this option is not used, a default komi of 6\&.5 will be used\&. The komi cannot be changed at runtime\&. The
+\fBkomi\fR
+GTP command will succeed if the argument has the same value as the configured komi and fail otherwise\&.
+.RE
+.PP
+\fB\-maxmoves\fR \fIn\fR
+.RS 4
+Limit the maximum number of moves\&. Can be useful if some games would not terminate otherwise\&. Default is 1000\&. \-1 means no limit\&.
+.RE
+.PP
+\fB\-observer\fR \fIcommand\fR
+.RS 4
+Command for the observer program\&.
+.RE
+.PP
+\fB\-openings\fR \fIdirectory\fR
+.RS 4
+Use openings from SGF files in the given directory\&. The openings will be cycled through in alphabetical order\&. If option
+\fB\-alternate\fR
+is set, each opening is played twice with colors exchanged\&. If
+TwoGtp
+is used as a GTP engine, the opening moves will be returned to the controller as responses to the first
+\fBgenmove\fR
+GTP commands\&. Note that in this case opening files with non\-alternating moves or setup stones are not supported (this is currently not checked and will result in undefined behavior)\&. In automatic mode (see
+\fB\-auto\fR), there is no such restriction\&.
+.RE
+.PP
+\fB\-referee\fR \fIcommand\fR
+.RS 4
+Command for the referee program\&.
+.RE
+.PP
+\fB\-sgffile\fR \fIprefix\fR
+.RS 4
+Save games after they are finished with filename
+\fIprefix\fR\-\fIn\fR\&.sgf
+(\fIn\fR
+is the game number)\&. The results are appended to the file
+\fIprefix\fR\&.dat\&.
+.RE
+.PP
+\fB\-size\fR \fIn\fR
+.RS 4
+Board size for games\&. If this option is not used, the size will be set with the
+\fBboardsize\fR
+command, or the default size 19 will be used when option
+\fB\-auto\fR
+is set\&.
+.RE
+.PP
+\fB\-threads\fR \fIn\fR
+.RS 4
+Use multi\-threading\&. Setting the number of threads to a value greater than 1 will create multiple instances of the Go programs to play n games in parallel\&. Can only be used together with option
+\fB\-auto\fR\&.
+.RE
+.PP
+\fB\-time\fR \fItimespec\fR
+.RS 4
+Set time limits (basetime[+overtime/moves])\&. The base time and overtime (byoyomi) can have an optional unit specifier (m or min for minutes; s or sec for seconds; default is minutes)\&.
+.RE
+.PP
+\fB\-verbose\fR
+.RS 4
+Print debugging messages\&. This will print GTP commands and responses and text written to the standard error stream by the programs to the standard error stream\&. If option
+\fB\-threads\fR
+is used only the debugging messages of the first thread are written\&.
+.RE
+.PP
+\fB\-version\fR
+.RS 4
+Print version and exit\&.
+.RE
+.PP
+\fB\-white\fR \fIcommand\fR
+.RS 4
+Command for the white program\&.
+.RE
+.PP
+\fB\-xml\fR
+.RS 4
+Save games in XML format\&.
+.RE
+.SH "GTP EXTENSIONS"
+.PP
+.PP
+\fBgogui\-interrupt\fR
+.RS 4
+Indicate interrupt ability for GoGui\&.
+TwoGtp
+will forward the interrupt to both programs, with the appropriate method if they implement either
+\fBgogui\-interrupt\fR
+or
+\fBgogui\-sigint\fR\&. See the chapter "Interrupting Commands" in the
+GoGui
+documentation\&.
+.RE
+.PP
+\fBgogui\-title\fR
+.RS 4
+Return a title for the current game consisting of the game number (if option
+\fB\-sgffile\fR
+was used) and the player names\&.
+.RE
+.PP
+\fBgogui\-twogtp\-black \fR\fB\fIcommand\fR\fR
+.RS 4
+Send command to the black player\&.
+.RE
+.PP
+\fBgogui\-twogtp\-observer \fR\fB\fIcommand\fR\fR
+.RS 4
+Send command to the observer program\&.
+.RE
+.PP
+\fBgogui\-twogtp\-referee \fR\fB\fIcommand\fR\fR
+.RS 4
+Send command to the referee program\&.
+.RE
+.PP
+\fBgogui\-twogtp\-white \fR\fB\fIcommand\fR\fR
+.RS 4
+Send command to the white player\&.
+.RE
+.SH "EXAMPLES"
+.SS "Play games"
+.sp
+Play 100 games between GNU Go, default level, and GNU Go, level 5, on a 9x9 board, with alternating colors; save games and results to files with filename prefix gnugo5:
+.PP
+.if n \{\
+.RS 4
+.\}
+.nf
+\fB
+BLACK="gnugo \-\-mode gtp"
+WHITE="gnugo \-\-mode gtp \-\-level 5"
+gogui\-twogtp \-black "$BLACK" \-white "$WHITE" \-games 100 \e
+  \-size 9 \-alternate \-sgffile gnugo5 \-auto
+\fR
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+.SS "Analyze results"
+.sp
+Create a HTML formatted result page of the games played in the previous section:
+.PP
+.if n \{\
+.RS 4
+.\}
+.nf
+\fB
+gogui\-twogtp \-analyze gnugo5\&.dat
+\fR
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+.SS "Play one game with graphical display"
+.sp
+Play one game between GNU Go, default level, and GNU Go, level 5, using GoGui as a graphical display (to start playing select Computer Color/Both from the Game menu in GoGui):
+.PP
+.if n \{\
+.RS 4
+.\}
+.nf
+\fB
+BLACK="gnugo \-\-mode gtp"
+WHITE="gnugo \-\-mode gtp \-\-level 5"
+gogui \-program "gogui\-twogtp \-black \e"$BLACK\e" \-white \e"$WHITE\e""
+\fR
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+.SS "Play games with graphical display"
+.sp
+Play 100 games with same settings as in the first example, with GoGui as a graphical display (start games automatically):
+.PP
+.if n \{\
+.RS 4
+.\}
+.nf
+\fB
+BLACK="gnugo \-\-mode gtp"
+WHITE="gnugo \-\-mode gtp \-\-level 5"
+TWOGTP="gogui\-twogtp \-black \e"$BLACK\e" \-white \e"$WHITE\e" \-games 100 \e
+  \-size 9 \-alternate \-sgffile gnugo5"
+gogui \-size 9 \-program "$TWOGTP" \-computer\-both \-auto
+\fR
+.fi
+.if n \{\
+.RE
+.\}
+.PP
+

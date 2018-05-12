@@ -1,0 +1,113 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>gogui</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="appendix-reference.html" title="Appendix A. Reference"><link rel="prev" href="appendix-reference.html" title="Appendix A. Reference"><link rel="next" href="reference-adapter.html" title="gogui-adapter"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">gogui</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="appendix-reference.html">Prev</a> </td><th width="60%" align="center">Appendix A. Reference</th><td width="20%" align="right"> <a accesskey="n" href="reference-adapter.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="reference-gogui"></a><div class="titlepage"></div><div class="refnamediv"><h2><span class="refentrytitle">gogui</span></h2><p>gogui — Graphical user interface for Go programs.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">gogui</code>  [<code class="option">-analyze-commands</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-auto</code>] [ <code class="option">-computer-black</code>  |   <code class="option">-computer-white</code>  |   <code class="option">-computer-both</code>  |   <code class="option">-computer-none</code> ] [<code class="option">-command</code> <em class="replaceable"><code>command</code></em>] [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-gtpfile</code> <em class="replaceable"><code>filename</code></em>] [<code class="option">-komi</code> <em class="replaceable"><code>value</code></em>] [<code class="option">-laf</code> <em class="replaceable"><code>name</code></em>] [<code class="option">-move</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-program</code> <em class="replaceable"><code>command</code></em>] [<code class="option">-register</code>] [<code class="option">-size</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-time</code> <em class="replaceable"><code>timespec</code></em>] [<code class="option">-verbose</code>] [<em class="replaceable"><code>file</code></em>]</p></div><div class="cmdsynopsis"><p><code class="command">gogui</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui</code>   <code class="option">-version</code> </p></div></div><div class="refsection"><a name="idp1275063012"></a><h2>Description</h2><p>
+GoGui is a graphical interface to programs that play the game of Go
+and use GTP (Go Text Protocol). This reference describes only the command
+line arguments for invoking GoGui. A complete HTML documentation is included
+in the GoGui package.
+</p></div><div class="refsection"><a name="idp1275063836"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<code class="option">-analyze-commands</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Use the given file to read analyze command configuration.
+</p></dd><dt><span class="term">
+<code class="option">-auto</code>
+</span></dt><dd><p>
+Automatically start a new game if the program plays both
+colors and a game is finished.
+</p></dd><dt><span class="term">
+<code class="option">-command</code> <em class="replaceable"><code>command</code></em>
+</span></dt><dd><p>
+Send GTP command at startup. The argument can contain multiple
+commands separated by '\n'.
+</p></dd><dt><span class="term">
+<code class="option">-computer-black</code>
+</span></dt><dd><p>
+Computer plays Black.
+</p></dd><dt><span class="term">
+<code class="option">-computer-both</code>
+</span></dt><dd><p>
+Computer plays both sides.
+</p></dd><dt><span class="term">
+<code class="option">-computer-none</code>
+</span></dt><dd><p>
+Computer plays no side.
+</p></dd><dt><span class="term">
+<code class="option">-computer-white</code>
+</span></dt><dd><p>
+Computer plays White.
+</p></dd><dt><span class="term">
+<code class="option">-config</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Read command line options and arguments from the given file.
+</p></dd><dt><span class="term">
+<code class="option">-gtpfile</code> <em class="replaceable"><code>filename</code></em>
+</span></dt><dd><p>
+Send GTP file at startup.
+</p></dd><dt><span class="term">
+<code class="option">-help</code>
+</span></dt><dd><p>
+Display help and exit.
+</p></dd><dt><span class="term">
+<code class="option">-komi</code> <em class="replaceable"><code>value</code></em>
+</span></dt><dd><p>
+Set the komi value.
+</p></dd><dt><span class="term">
+<code class="option">-laf</code> <em class="replaceable"><code>name</code></em>
+</span></dt><dd><p>
+Set the Swing look and feel.
+If this option is not used, GoGui tries to use "system" on Linux and Windows,
+and "quaqua" on Mac OS/X, but shows no error if the look and feel is not found.
+If the option is used, the name can be "default" or an empty string for the
+default look and feel of the Java implementation, a full class name, or one of
+the following shortcuts:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term">cross</span></dt><dd>
+UIManager.getCrossPlatformLookAndFeelClassName()
+</dd><dt><span class="term">motif</span></dt><dd>
+com.sun.java.swing.plaf.motif.MotifLookAndFeel
+</dd><dt><span class="term">gtk</span></dt><dd>
+com.sun.java.swing.plaf.gtk.GTKLookAndFeel
+</dd><dt><span class="term">quaqua</span></dt><dd>
+ch.randelshofer.quaqua.QuaquaLookAndFeel
+</dd><dt><span class="term">system</span></dt><dd>
+UIManager.getSystemLookAndFeelClassName()
+</dd><dt><span class="term">windows</span></dt><dd>
+com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+</dd></dl></div><p>
+</p></dd><dt><span class="term">
+<code class="option">-move</code> <em class="replaceable"><code>n</code></em>
+</span></dt><dd><p>
+Load SGF file given as the main argument until the given move number.
+</p></dd><dt><span class="term">
+<code class="option">-program</code> <em class="replaceable"><code>command</code></em>
+</span></dt><dd><p>
+Go program to attach. The argument is the command line to start the
+program.
+</p></dd><dt><span class="term">
+<code class="option">-register</code>
+</span></dt><dd><p>
+Automatically create an entry in the  Program menu if GoGui was invoked with
+the option <code class="option">-program</code> and no menu item for a program with the
+given command already exists.
+</p></dd><dt><span class="term">
+<code class="option">-size</code> <em class="replaceable"><code>n</code></em>
+</span></dt><dd><p>
+Set the board size.
+</p></dd><dt><span class="term">
+<code class="option">-time</code> <em class="replaceable"><code>timespec</code></em>
+</span></dt><dd><p>
+Set time limits (basetime[+overtime/moves]).
+The base time and overtime (byoyomi) can have an optional unit specifier
+(m or min for minutes; s or sec for seconds; default is minutes).
+</p></dd><dt><span class="term">
+<code class="option">-verbose</code>
+</span></dt><dd><p>
+Print debugging messages. This includes the complete stream of GTP commands.
+Compared to the GTP shell, this has the additional advantage that the
+commands and responses are written immediately when they are received
+and the order of the standard output and standard error stream of the
+Go engine will more likely be in the correct order.
+</p></dd><dt><span class="term">
+<code class="option">-version</code>
+</span></dt><dd><p>
+Print version and exit.
+</p></dd></dl></div><p>
+
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="appendix-reference.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="appendix-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="reference-adapter.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Appendix A. Reference </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> gogui-adapter</td></tr></table></div></body></html>

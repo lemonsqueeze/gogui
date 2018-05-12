@@ -1,0 +1,115 @@
+'\" t
+.\"     Title: gogui-regress
+.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 05/12/2018
+.\"    Manual: GoGui Reference
+.\"    Source: GoGui 1.4.10
+.\"  Language: English
+.\"
+.TH "GOGUI\-REGRESS" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+gogui-regress \- Runs GTP regression tests\&.
+.SH "SYNOPSIS"
+.HP \w'\fBgogui\-regress\fR\ 'u
+\fBgogui\-regress\fR [\fB\-config\fR\ \fIfile\fR] [\fB\-gtpfile\fR\ \fIfile\fR] [\fB\-long\fR] [\fB\-output\fR\ \fIdirectory\fR] [\fB\-verbose\fR] \fIprogram\fR \fItest\&.tst\fR...
+.HP \w'\fBgogui\-regress\fR\ 'u
+\fBgogui\-regress\fR \fB\-help\fR
+.HP \w'\fBgogui\-regress\fR\ 'u
+\fBgogui\-regress\fR \fB\-version\fR
+.SH "DESCRIPTION"
+.PP
+Runs a list of regression tests for a Go program supporting the Go Text Protocol, and formats the output as HTML\&. The regression tests are GTP files, which use the special comment
+\fB#?\fR, as used for the
+\m[blue]\fBGNU Go\fR\m[]\&\s-2\u[1]\d\s+2
+regression tests (see section
+\m[blue]\fBRegression testing\fR\m[]\&\s-2\u[2]\d\s+2
+of the GNU Go documentation)\&. The regular expression syntax for the expected responses is mostly compatible to the one used by the GNU Go regression test suite, see the documentation for
+\m[blue]\fBjava\&.util\&.regex\&.Pattern\fR\m[]\&\s-2\u[3]\d\s+2
+for a complete description\&.
+.PP
+Test names that start with a \*(Aq@\*(Aq are interpreted as files containing a test suite\&. The file with the corresponding name (excluding the \*(Aq@\*(Aq) is read and every non\-empty line that does not start with the comment character \*(Aq#\*(Aq is added to the list of test names\&. The files are allowed to contain names of other test suites\&.
+.PP
+The main output file is
+index\&.html\&. For each test file
+\fItest\fR\&.tst, additional files with name
+\fItest\fR\&.html
+and
+\fItest\fR\&.out\&.html
+are generated\&. Additionally, a text file
+summary\&.dat
+is generated, with a table row containing the most important summary statistics\&. gogui\-regress will start a new instance of the Go program for each test and use the directory of the test file as the working directory for the Go program\&.
+.PP
+The return value of gogui\-regress is 0, if all tests completed successfully with no unexpected fails, 1 if there was at least one unexpected fail, and 2 if the Go program crashed or some other error occurred\&.
+.SH "OPTIONS"
+.PP
+\fB\-config\fR \fIfile\fR
+.RS 4
+Read command line options and arguments from the given file\&.
+.RE
+.PP
+\fB\-gtpfile\fR \fIfile\fR
+.RS 4
+File with GTP commands to execute before each test\&. This file can be used to configure engine parameters\&. If a command from the file fails, the program will exit with an error message\&.
+.RE
+.PP
+\fB\-help\fR
+.RS 4
+Display help and exit\&.
+.RE
+.PP
+\fB\-long\fR
+.RS 4
+Print longer output to standard output, one line per test\&.
+.RE
+.PP
+\fB\-output\fR \fIdirectory\fR
+.RS 4
+Write output files to the given directory\&.
+.RE
+.PP
+\fB\-verbose\fR
+.RS 4
+Print the GTP stream to the Go program to standard error\&.
+.RE
+.PP
+\fB\-version\fR
+.RS 4
+Print version and exit\&.
+.RE
+.PP
+.SH "NOTES"
+.IP " 1." 4
+GNU Go
+.RS 4
+\%http://www.gnu.org/software/gnugo/gnugo.html
+.RE
+.IP " 2." 4
+Regression testing
+.RS 4
+\%http://www.gnu.org/software/gnugo/gnugo_20.html#SEC205
+.RE
+.IP " 3." 4
+java.util.regex.Pattern
+.RS 4
+\%http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/Pattern.html
+.RE

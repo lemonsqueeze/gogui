@@ -1,0 +1,202 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 7. Analyze Commands</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="index.html" title="GoGui Documentation"><link rel="prev" href="gtpshell.html" title="Chapter 6. GTP Shell"><link rel="next" href="live-gfx.html" title="Chapter 8. Live Graphics"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 7. Analyze Commands</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="gtpshell.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="live-gfx.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="analyze"></a>Chapter 7. Analyze Commands</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="analyze.html#idp1274851876">Types</a></span></dt><dt><span class="section"><a href="analyze.html#idp1274907748">Label</a></span></dt><dt><span class="section"><a href="analyze.html#idp1274908684">Command</a></span></dt></dl></div><p>
+GoGui allows the Go program to define analyze commands.
+An analyze command corresponds to a GTP command and describes its parameters
+and response type in a way that they can be invoked from the user interface
+and the response be displayed graphically on the board.
+</p><p>
+Analyze commands can be run from the analyze dialog.
+In this dialog, you can also select if the command should automatically run
+after each change on the board, and if the board should be cleared from
+results of previous commands before displaying the new result.
+</p><p>
+It is recommended that the Go program implements the extension command
+<span class="command"><strong>gogui-analyze_commands</strong></span>, which allows GoGui to query
+what analyze commands are supported when a new program is attached.
+Otherwise a default configuration is used, which knows some standard GTP
+and GNU Go extension commands. It is also possible to provide
+a configuration file by using the <code class="option">-analyze-commands</code> command
+line option when invoking GoGui.
+</p><p>
+An example configuration is the default configuration file
+<code class="filename">src/net/sf/gogui/gui/analyze-commands</code> in the GoGui
+package.
+The format consists of one line per command:
+</p><pre class="programlisting">
+<strong class="userinput"><code>
+type/label/command
+</code></strong>
+</pre><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1274851876"></a>Types</h2></div></div></div><p>
+The command type determines in what format the response is expected to be and
+how it is interpreted and displayed.
+It can be one of the following:
+
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><strong class="userinput"><code>bwboard</code></strong></span></dt><dd>
+The response of the command is a board of strings.
+Strings "b" or "black" will be displayed as black territory,
+"w" or "white" as white territory, all other strings are not displayed.
+</dd><dt><span class="term"><strong class="userinput"><code>cboard</code></strong></span></dt><dd>
+The response of the command is a board of strings with color names.
+They will be displayed as background colors for the fields.
+Valid color names are black, blue, cyan, green, gray, magenta,
+pink, red, white, and yellow or #rrggbb.
+Unknown names or the special string "" are ignored.
+</dd><dt><span class="term"><strong class="userinput"><code>dboard</code></strong></span></dt><dd>
+The response of the command is a board of floating point
+numbers that represent influence data.
+They will be displayed as black (positive) and white (negative)
+squares on the board.
+The maximum size of a square is such that the corner would touch
+the edge of a stone on that field; the edge length of the
+square is proportional to the floating point number.
+The numbers are expected to be between -1 and 1.
+</dd><dt><span class="term"><strong class="userinput"><code>eplist</code></strong></span></dt><dd>
+Editable point list command.
+The command is used to set a list of points.
+It needs the following syntax:
+the current point list is set, if the argument is a point list (or empty);
+the current point list is returned, if the argument is
+<strong class="userinput"><code>show</code></strong>.
+GoGui always queries the current point list first, selects the points on the
+board and allows the user to edit them, then it sends the command with the
+selected points as the argument.
+</dd><dt><span class="term"><strong class="userinput"><code>gfx</code></strong></span></dt><dd>
+General graphical display command.
+The response contains one graphics command per line.
+Graphics commands are: BLACK, CIRCLE, COLOR, INFLUENCE, LABEL, MARK, SQUARE,
+TEXT, TRIANGLE, VAR, WHITE.
+TEXT is followed by a text displayed on the status bar;
+LABEL arguments are point text pairs;
+INFLUENCE arguments are point double pairs;
+COLOR arguments are a color (like in cboard) and a point list;
+VAR arguments are moves (b|w point|PASS);
+all other commands take a point list.
+If more than one TEXT commands exist, the text will not be displayed in the
+status bar, but the lines will be merged to a multi-line text and displayed in
+a window.
+See the <strong class="userinput"><code>gogui-dummy-gfx</code></strong> command in
+<a class="xref" href="reference-dummy.html" title="gogui-dummy"><span class="refentrytitle">gogui-dummy</span>(1)</a> for an example.
+</dd><dt><span class="term"><strong class="userinput"><code>hstring</code></strong></span></dt><dd>
+The response is a multi-line text.
+It will be displayed in a window using syntax highlighting.
+Lines beginning with a word followed by a colon are displayed in bold,
+points and moves in blue, the strings "black" and "white" in purple,
+numbers in green, and words that are completely uppercase in red.
+</dd><dt><span class="term"><strong class="userinput"><code>hpstring</code></strong></span></dt><dd>
+Combines <strong class="userinput"><code>pstring</code></strong> and <strong class="userinput"><code>hstring</code></strong>.
+</dd><dt><span class="term"><strong class="userinput"><code>none</code></strong></span></dt><dd>
+The response is not displayed.
+</dd><dt><span class="term"><strong class="userinput"><code>param</code></strong></span></dt><dd><p>
+The response to the command is a list of program parameters.
+A dialog will be shown to edit the parameters.
+Each line of the response must contain a key and value.
+It must be possible to change a value using the same command, with the
+key and new value as arguments.
+No whitespaces are allowed in the keys, but underscores will be
+replaced by spaces in the labels of the dialog and lowercase keys
+will be capitalized.
+Optionally, a line can have a type identifier for the value before the key.
+Currently, the following types are supported:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><strong class="userinput"><code>[string]</code></strong></span></dt><dd>
+The value is displayed by an editable text field.
+</dd><dt><span class="term"><strong class="userinput"><code>[bool]</code></strong></span></dt><dd>
+The value is a boolean parameter (using "1" for
+true and "0" for false) and displayed by a checkbox.
+</dd><dt><span class="term"><strong class="userinput"><code>[list/item1/item2/...]</code></strong></span></dt><dd>
+The value is selected from a list of valid items and displayed by
+a combobox. No whitespaces are allowed in the items, but underscores will be
+replaced by spaces in the labels of the combobox and lowercase items
+will be capitalized.
+</dd></dl></div><p>
+If no type or an unknown type is given, "string" is assumed by default.
+</p></dd><dt><span class="term"><strong class="userinput"><code>plist</code></strong></span></dt><dd>
+The response of the command is a list of points.
+All points will be marked on the board.
+</dd><dt><span class="term"><strong class="userinput"><code>pspairs</code></strong></span></dt><dd>
+The response of the command is a list of point string pairs.
+The strings are displayed as labels on the points.
+</dd><dt><span class="term"><strong class="userinput"><code>pstring</code></strong></span></dt><dd>
+The response of the command is a text, which also contains points.
+Valid points contained in the text will be marked on the board.
+If the text has only a single line, it will be displayed in the status line.
+If it has multiple lines, a window will pop up.
+If text in the window is selected, only the valid points contained in
+the selected text are marked on the board.
+</dd><dt><span class="term"><strong class="userinput"><code>sboard</code></strong></span></dt><dd>
+The response of the command is a board of strings.
+The strings will be displayed as labels for the points on the board.
+Strings containing whitespaces have to be put in quotation marks.
+The special string "" is used for no string on a point.
+</dd><dt><span class="term"><strong class="userinput"><code>string</code></strong></span></dt><dd>
+The response of the command is a text.
+If the text has only a single line, it will be displayed in the status line.
+If it has multiple lines, a window will pop up.
+</dd><dt><span class="term"><strong class="userinput"><code>var</code></strong></span></dt><dd>
+The response of the command is a variation of moves
+containing points or passes.
+The moves do not include the player color and are expected to be of alternating
+color.
+Text not containing points is ignored.
+They will be displayed as numbered semi-transparent stones on the board.
+The current color to move is assumed to move first.
+Additionally the response is displayed as a string.
+</dd><dt><span class="term"><strong class="userinput"><code>varb</code></strong></span></dt><dd>
+Like <strong class="userinput"><code>var</code></strong>, but Black is assumed to move first.
+</dd><dt><span class="term"><strong class="userinput"><code>varc</code></strong></span></dt><dd>
+Like <strong class="userinput"><code>var</code></strong>, but the wildcard color in the command is
+assumed to move first (see below).
+</dd><dt><span class="term"><strong class="userinput"><code>varp</code></strong></span></dt><dd>
+Like <strong class="userinput"><code>var</code></strong>, but the command needs a point argument;
+the color at that point is assumed to move first.
+</dd><dt><span class="term"><strong class="userinput"><code>varpo</code></strong></span></dt><dd>
+Like <strong class="userinput"><code>var</code></strong>, but the command needs a point argument
+and the other color than the color at that point is assumed to move first.
+</dd><dt><span class="term"><strong class="userinput"><code>varw</code></strong></span></dt><dd>
+Like <strong class="userinput"><code>var</code></strong>, but White is assumed to move first.
+</dd></dl></div><p>
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1274907748"></a>Label</h2></div></div></div><p>
+The label to use for this command in the menu.
+</p><p></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1274908684"></a>Command</h2></div></div></div><p>
+The command to send to the Go program.
+It can contain one of the following wildcards:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><strong class="userinput"><code>%c</code></strong></span></dt><dd>
+Will be replaced by a color, which can be selected in the analyze window;
+the default is the color to play.
+</dd><dt><span class="term"><strong class="userinput"><code>%f</code></strong></span></dt><dd><p>
+Will be replaced by a file name entered by the user.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+This wildcard is deprecated and might not be supported in the future.
+It has been superseded by the more specific wildcards
+<strong class="userinput"><code>%r</code></strong> and <strong class="userinput"><code>%w</code></strong>.
+</p></div><p>
+</p></dd><dt><span class="term"><strong class="userinput"><code>%m</code></strong></span></dt><dd>
+Will be replaced by the color to play.
+</dd><dt><span class="term"><strong class="userinput"><code>%o</code></strong></span></dt><dd>
+This wildcard is for commands that take an optional string argument and can
+be used for querying or setting a parameter of the Go program.
+The command should return the current value of the parameter, if no argument
+is given, and set the parameter to the argument otherwise.
+The command will be run first without an argument to retrieve the current
+value, which is used as default value in an input box presented to the
+user.
+If the user changes the value, the command will be run with the new value
+as an argument to set the parameter.
+</dd><dt><span class="term"><strong class="userinput"><code>%p</code></strong></span></dt><dd>
+Will be replaced by the a point selected by the user.
+</dd><dt><span class="term"><strong class="userinput"><code>%P</code></strong></span></dt><dd>
+Will be replaced by a list of points selected by the user.
+The points are selected by clicking on the board.
+The last point of the list is selected either by clicking with the
+<span class="keycap"><strong>Ctrl</strong></span> key pressed, double-clicking, or using the right
+mouse button.
+</dd><dt><span class="term"><strong class="userinput"><code>%r</code></strong></span></dt><dd><p>
+Will be replaced by a file name for opening a file selected by the user.
+If the path to the file contains spaces, it will be quoted with double quotes.
+</p></dd><dt><span class="term"><strong class="userinput"><code>%s</code></strong></span></dt><dd>
+Will be replaced by an argument entered by the user.
+</dd><dt><span class="term"><strong class="userinput"><code>%w</code></strong></span></dt><dd><p>
+Will be replaced by a file name for saving selected by the user.
+If the path to the file contains spaces, it will be quoted with double quotes.
+</p></dd></dl></div><p>
+</p><p>
+
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="gtpshell.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="live-gfx.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 6. GTP Shell </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 8. Live Graphics</td></tr></table></div></body></html>

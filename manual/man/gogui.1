@@ -1,0 +1,172 @@
+'\" t
+.\"     Title: gogui
+.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 05/12/2018
+.\"    Manual: GoGui Reference
+.\"    Source: GoGui 1.4.10
+.\"  Language: English
+.\"
+.TH "GOGUI" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+gogui \- Graphical user interface for Go programs\&.
+.SH "SYNOPSIS"
+.HP \w'\fBgogui\fR\ 'u
+\fBgogui\fR [\fB\-analyze\-commands\fR\ \fIfile\fR] [\fB\-auto\fR] [\fB\-computer\-black\fR | \fB\-computer\-white\fR | \fB\-computer\-both\fR | \fB\-computer\-none\fR] [\fB\-command\fR\ \fIcommand\fR] [\fB\-config\fR\ \fIfile\fR] [\fB\-gtpfile\fR\ \fIfilename\fR] [\fB\-komi\fR\ \fIvalue\fR] [\fB\-laf\fR\ \fIname\fR] [\fB\-move\fR\ \fIn\fR] [\fB\-program\fR\ \fIcommand\fR] [\fB\-register\fR] [\fB\-size\fR\ \fIn\fR] [\fB\-time\fR\ \fItimespec\fR] [\fB\-verbose\fR] [\fIfile\fR]
+.HP \w'\fBgogui\fR\ 'u
+\fBgogui\fR \fB\-help\fR
+.HP \w'\fBgogui\fR\ 'u
+\fBgogui\fR \fB\-version\fR
+.SH "DESCRIPTION"
+.PP
+GoGui is a graphical interface to programs that play the game of Go and use GTP (Go Text Protocol)\&. This reference describes only the command line arguments for invoking GoGui\&. A complete HTML documentation is included in the GoGui package\&.
+.SH "OPTIONS"
+.PP
+\fB\-analyze\-commands\fR \fIfile\fR
+.RS 4
+Use the given file to read analyze command configuration\&.
+.RE
+.PP
+\fB\-auto\fR
+.RS 4
+Automatically start a new game if the program plays both colors and a game is finished\&.
+.RE
+.PP
+\fB\-command\fR \fIcommand\fR
+.RS 4
+Send GTP command at startup\&. The argument can contain multiple commands separated by \*(Aq\en\*(Aq\&.
+.RE
+.PP
+\fB\-computer\-black\fR
+.RS 4
+Computer plays Black\&.
+.RE
+.PP
+\fB\-computer\-both\fR
+.RS 4
+Computer plays both sides\&.
+.RE
+.PP
+\fB\-computer\-none\fR
+.RS 4
+Computer plays no side\&.
+.RE
+.PP
+\fB\-computer\-white\fR
+.RS 4
+Computer plays White\&.
+.RE
+.PP
+\fB\-config\fR \fIfile\fR
+.RS 4
+Read command line options and arguments from the given file\&.
+.RE
+.PP
+\fB\-gtpfile\fR \fIfilename\fR
+.RS 4
+Send GTP file at startup\&.
+.RE
+.PP
+\fB\-help\fR
+.RS 4
+Display help and exit\&.
+.RE
+.PP
+\fB\-komi\fR \fIvalue\fR
+.RS 4
+Set the komi value\&.
+.RE
+.PP
+\fB\-laf\fR \fIname\fR
+.RS 4
+Set the Swing look and feel\&. If this option is not used, GoGui tries to use "system" on Linux and Windows, and "quaqua" on Mac OS/X, but shows no error if the look and feel is not found\&. If the option is used, the name can be "default" or an empty string for the default look and feel of the Java implementation, a full class name, or one of the following shortcuts:
+.PP
+cross
+.RS 4
+UIManager\&.getCrossPlatformLookAndFeelClassName()
+.RE
+.PP
+motif
+.RS 4
+com\&.sun\&.java\&.swing\&.plaf\&.motif\&.MotifLookAndFeel
+.RE
+.PP
+gtk
+.RS 4
+com\&.sun\&.java\&.swing\&.plaf\&.gtk\&.GTKLookAndFeel
+.RE
+.PP
+quaqua
+.RS 4
+ch\&.randelshofer\&.quaqua\&.QuaquaLookAndFeel
+.RE
+.PP
+system
+.RS 4
+UIManager\&.getSystemLookAndFeelClassName()
+.RE
+.PP
+windows
+.RS 4
+com\&.sun\&.java\&.swing\&.plaf\&.windows\&.WindowsLookAndFeel
+.RE
+.sp
+.RE
+.PP
+\fB\-move\fR \fIn\fR
+.RS 4
+Load SGF file given as the main argument until the given move number\&.
+.RE
+.PP
+\fB\-program\fR \fIcommand\fR
+.RS 4
+Go program to attach\&. The argument is the command line to start the program\&.
+.RE
+.PP
+\fB\-register\fR
+.RS 4
+Automatically create an entry in the Program menu if GoGui was invoked with the option
+\fB\-program\fR
+and no menu item for a program with the given command already exists\&.
+.RE
+.PP
+\fB\-size\fR \fIn\fR
+.RS 4
+Set the board size\&.
+.RE
+.PP
+\fB\-time\fR \fItimespec\fR
+.RS 4
+Set time limits (basetime[+overtime/moves])\&. The base time and overtime (byoyomi) can have an optional unit specifier (m or min for minutes; s or sec for seconds; default is minutes)\&.
+.RE
+.PP
+\fB\-verbose\fR
+.RS 4
+Print debugging messages\&. This includes the complete stream of GTP commands\&. Compared to the GTP shell, this has the additional advantage that the commands and responses are written immediately when they are received and the order of the standard output and standard error stream of the Go engine will more likely be in the correct order\&.
+.RE
+.PP
+\fB\-version\fR
+.RS 4
+Print version and exit\&.
+.RE
+.PP
+

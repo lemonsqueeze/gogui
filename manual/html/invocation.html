@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 1. Invocation</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="index.html" title="GoGui Documentation"><link rel="prev" href="readme.html" title="README"><link rel="next" href="programs.html" title="Chapter 2. Programs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 1. Invocation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="readme.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="programs.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="invocation"></a>Chapter 1. Invocation</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="invocation.html#idp1271331372">General</a></span></dt><dt><span class="section"><a href="invocation.html#idp1271368996"><span class="application">GoGui</span> on Unix</a></span></dt><dt><span class="section"><a href="invocation.html#idp1274409556"><span class="application">GoGui</span> on Windows</a></span></dt><dt><span class="section"><a href="invocation.html#idp1274411868"><span class="application">GoGui</span> on Mac OS X</a></span></dt></dl></div><a class="indexterm" name="idp1271390340"></a><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1271331372"></a>General</h2></div></div></div><p>
+<span class="application">GoGui</span> can be invoked with the command:
+</p><pre class="programlisting">
+<strong class="userinput"><code>java -jar gogui.jar [options] [file]</code></strong></pre><p>
+using the file <code class="filename">gogui.jar</code> in the
+<code class="filename">lib</code> subdirectory.
+</p><p>
+The command line for executing the actual Go program can be given
+with the <code class="option">-program</code> option.
+Otherwise, GoGui will start with the Go program attached in the previous
+session, or without Go program if none was attached.
+You can attach and detach a Go program at any time by using the
+<span class="guimenuitem">Attach</span>, <span class="guimenuitem">New Program</span> and
+<span class="guimenuitem">Detach</span> menu items from the
+<span class="guimenu">Program</span> menu.
+</p><p>
+See <a class="xref" href="reference-gogui.html" title="gogui"><span class="refentrytitle">gogui</span>(1)</a> for a complete listing of the possible
+command line options to <strong class="userinput"><code>gogui</code></strong>.
+</p><p></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1271368996"></a><span class="application">GoGui</span> on Unix</h2></div></div></div><p>
+<a class="indexterm" name="idp1271479364"></a>
+For Unix systems, there are launcher scripts in the
+<code class="filename">bin</code> directory.
+<a class="indexterm" name="idp1271480660"></a>
+The launcher scripts respect the environment variable
+<code class="envar">GOGUI_JAVA_HOME</code>, if defined, and look for the jar files
+in <code class="filename">../lib</code>
+relative to the <code class="filename">bin</code> directory.
+You can add the <code class="filename">bin</code> directory of GoGui to your
+<code class="envar">PATH</code> environment variable.
+<a class="indexterm" name="idp1271483108"></a>
+The invocation is then simply:
+</p><pre class="programlisting">
+<strong class="userinput"><code>gogui [options] [file]</code></strong></pre><p>
+To register <span class="application">GoGui</span> as a handler
+for <a class="ulink" href="http://www.red-bean.com/sgf/" target="_top"><acronym class="acronym">SGF</acronym></a>
+files, you can configure a new file association for the type
+<strong class="userinput"><code>application/x-go-sgf</code></strong> and the file name pattern
+<strong class="userinput"><code>*.sgf</code></strong> to execute
+<strong class="userinput"><code>gogui</code></strong>.
+<a class="indexterm" name="idp1274407636"></a>
+</p><p>
+For Linux systems, there is a shell script <code class="filename">install.sh</code> in
+the main directory, which will install GoGui on the system, including the
+creation of desktop menu entries, entries in the help system, and the
+registration as a handler for SGF files. This script needs to be run as root.
+</p><p></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1274409556"></a><span class="application">GoGui</span> on Windows</h2></div></div></div><p>
+<a class="indexterm" name="idp1274410196"></a>
+On Windows, the Java installation registers Java as a
+handler for jar-files and it is possible to launch GoGui by
+double-clicking on <code class="filename">gogui.jar</code> from a file browser.
+You can also drag a link to this file to the desktop.
+</p><p></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1274411868"></a><span class="application">GoGui</span> on Mac OS X</h2></div></div></div><p>
+<a class="indexterm" name="idp1274412508"></a>
+On Mac OS X, GoGui can be invoked using the UNIX launcher scripts in
+the <code class="filename">bin</code> directory.
+It is also possible to create an application bundle for Mac OS X by typing
+</p><pre class="programlisting">
+<strong class="userinput"><code>ant gogui.app</code></strong></pre><p>
+in the main directory. The resulting application bundle will be in
+<code class="filename">build/GoGui.app</code>. This requires that the
+<a class="ulink" href="http://ant.apache.org" target="_top">Ant</a> build system is installed on
+the system.
+</p><p></p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="readme.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="programs.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">README </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 2. Programs</td></tr></table></div></body></html>

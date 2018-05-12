@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 9. Setup Commands</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="index.html" title="GoGui Documentation"><link rel="prev" href="live-gfx.html" title="Chapter 8. Live Graphics"><link rel="next" href="interrupt.html" title="Chapter 10. Interrupting Commands"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 9. Setup Commands</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="live-gfx.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="interrupt.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="setup"></a>Chapter 9. Setup Commands</h1></div></div></div><a class="indexterm" name="idp1274939372"></a><p>
+The GTP version 2 specification contains no commands for setting up
+positions by specifying the location of stones on the board.
+GoGui will send setup stones as moves to the Go program, if possible.
+</p><p>
+This method has disadvantages.
+For example, the program cannot know that these moves are not real moves
+and if it maintains its own game tree for saving information like search
+traces, the internal trees will start with a long series of move nodes, if
+an initial setup position was transmitted by moves.
+</p><p>
+Therefore, GoGui defines the following GTP extension commands for setting up
+positions, which will be used if the Go program supports them:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="command"><strong>gogui-setup</strong></span></span></dt><dd><p>
+The argument to this command is a sequence of color point
+pairs (like for <span class="command"><strong>gogui-play_sequence</strong></span>).
+The effect of the command is that the stones are placed on the board.
+This command should only be sent after a <span class="command"><strong>clear_board</strong></span> and
+return a failure, if the board is not empty.
+It is allowed to setup positions that contain blocks with no liberties.
+If the Go program cannot handle such positions it should detect it and
+respond with a failure.
+</p></dd><dt><span class="term"><span class="command"><strong>gogui-setup_player</strong></span></span></dt><dd><p>
+The argument is a color (<strong class="userinput"><code>b</code></strong> or <strong class="userinput"><code>w</code></strong>)
+and should set the color to play in the setup position.
+This command is sent after the <span class="command"><strong>gogui-setup</strong></span> command, but
+only, if the color to play is known and if the command is supported by the Go
+program.
+Note that the color to play is not always well-defined (e.g. for combinatorial
+subgames) or known (e.g. SGF files with setup stones, but no player property).
+Support for this command is optional, because it is not a critical condition,
+if the engine is not informed about the color to play, although it can be
+desirable in some situations.
+</p></dd></dl></div><p>
+</p><p></p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="live-gfx.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="interrupt.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 8. Live Graphics </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 10. Interrupting Commands</td></tr></table></div></body></html>

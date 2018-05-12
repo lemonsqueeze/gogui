@@ -1,0 +1,26 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 10. Interrupting Commands</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="index.html" title="GoGui Documentation"><link rel="prev" href="setup.html" title="Chapter 9. Setup Commands"><link rel="next" href="tools.html" title="Chapter 11. Tools"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 10. Interrupting Commands</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="tools.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="interrupt"></a>Chapter 10. Interrupting Commands</h1></div></div></div><a class="indexterm" name="idp1274962932"></a><p>
+Commands can be interrupted, if the Go program supports it.
+This is useful, for example, if the move generation takes a long time, to give
+the user the ability to stop the current move generation and gain control over
+the interface again.
+</p><p>
+There are two ways of sending the interrupt signal to the program:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+The Go program reads the GTP input stream, while processing a command, and can
+interrupt the current command, if the special comment line
+<span class="command"><strong># interrupt</strong></span> is received.
+The Go program indicates this ability by implementing the command
+<span class="command"><strong>gogui-interrupt</strong></span>.
+</p></li><li class="listitem"><p>
+The alternative way is that the program can handle INT signals.
+It indicates this by implementing the <span class="command"><strong>gogui-sigint</strong></span>
+command and returning its process ID.
+GoGui will then send an INT signal to the process
+by invoking the shell command
+<strong class="userinput"><code>kill -INT <em class="replaceable"><code>pid</code></em></code></strong>.
+However, this will work only on UNIX systems and lacks the feature of
+transmitting interrupt signals over network GTP streams.
+</p></li></ol></div><p>
+If the program does not support any of these methods,
+GoGui will offer to kill and detach the program.
+</p><p></p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="tools.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 9. Setup Commands </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 11. Tools</td></tr></table></div></body></html>

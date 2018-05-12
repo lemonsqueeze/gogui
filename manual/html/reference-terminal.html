@@ -1,0 +1,55 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>gogui-terminal</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="appendix-reference.html" title="Appendix A. Reference"><link rel="prev" href="reference-statistics.html" title="gogui-statistics"><link rel="next" href="reference-thumbnailer.html" title="gogui-thumbnailer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">gogui-terminal</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="reference-statistics.html">Prev</a> </td><th width="60%" align="center">Appendix A. Reference</th><td width="20%" align="right"> <a accesskey="n" href="reference-thumbnailer.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="reference-terminal"></a><div class="titlepage"></div><div class="refnamediv"><h2><span class="refentrytitle">gogui-terminal</span></h2><p>gogui-terminal — 
+Simple text based interface to Go programs supporting GTP.
+</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">gogui-terminal</code>  [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-color</code>] [<code class="option">-size</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-verbose</code>]  <em class="replaceable"><code>program</code></em> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-terminal</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-terminal</code>   <code class="option">-version</code> </p></div></div><div class="refsection"><a name="idp1275622108"></a><h2>Description</h2><p>
+Simple text based interface to Go programs supporting the
+Go Text Protocol.
+The argument <em class="replaceable"><code>program</code></em> is a command line
+for the Go program .
+The interface keeps track of the board and prints it after each change on the
+board.
+If a move (coordinate on the board or pass) is entered, it is played
+on the board for the color to move, followed by a
+<span class="command"><strong>genmove</strong></span> command sent to the program.
+Other supported commands are:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="command"><strong>genmove</strong></span></span></dt><dd>
+Send a <span class="command"><strong>genmove</strong></span> command for the color to move to the program.
+</dd><dt><span class="term"><span class="command"><strong>help</strong></span></span></dt><dd>
+Print help.
+</dd><dt><span class="term"><span class="command"><strong>list</strong></span></span></dt><dd>
+Send a <span class="command"><strong>list_commands</strong></span> command to the program.
+</dd><dt><span class="term"><span class="command"><strong>load</strong></span></span></dt><dd>
+Load game from a SGF file.
+Moves are translated into <span class="command"><strong>play</strong></span> commands
+for the program.
+</dd><dt><span class="term"><span class="command"><strong>newgame [size]</strong></span></span></dt><dd>
+Start a new game with a given board size.
+</dd><dt><span class="term"><span class="command"><strong>save</strong></span></span></dt><dd>
+Save game to file in SGF format.
+</dd><dt><span class="term"><span class="command"><strong>undo</strong></span></span></dt><dd>
+Send a <span class="command"><strong>undo</strong></span> command to the program.
+</dd><dt><span class="term"><span class="command"><strong>quit</strong></span></span></dt><dd>
+Terminate program and exit.
+</dd></dl></div><p>
+GTP commands that change the board state are not allowed.
+Other GTP commands are forwarded to the program.
+</p></div><div class="refsection"><a name="idp1275633148"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<code class="option">-config</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Read command line options and arguments from the given file.
+</p></dd><dt><span class="term">
+<code class="option">-color</code>
+</span></dt><dd><p>
+Colorize text output of the Go board using ANSI escape sequences.
+</p></dd><dt><span class="term">
+<code class="option">-size</code> <em class="replaceable"><code>n</code></em>
+</span></dt><dd><p>
+Board size.
+</p></dd><dt><span class="term">
+<code class="option">-verbose</code>
+</span></dt><dd><p>
+Log GTP stream to standard error.
+</p></dd><dt><span class="term"><code class="option">-version</code></span></dt><dd><p>
+Print version and exit.
+</p></dd></dl></div><p>
+
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="reference-statistics.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="appendix-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="reference-thumbnailer.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">gogui-statistics </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> gogui-thumbnailer</td></tr></table></div></body></html>

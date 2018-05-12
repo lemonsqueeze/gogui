@@ -1,0 +1,732 @@
+<appendix id="news">
+<title>Release Notes</title>
+<para>
+<revhistory>
+
+<revision>
+<revnumber>1.4.UNKNOWN</revnumber>
+<date></date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+New menu item <guisubmenu>View</guisubmenu> /
+<guisubmenu>Board Orientation</guisubmenu>
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.9.UNKNOWN</revnumber>
+<date></date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Added Hungarian translation (contributed by direktx@users.sf.net).
+</simpara>
+<simpara>
+SGF files with invalid point values of length one were not loaded
+by GoGui and triggered unhandled exceptions in the GoGui tools (bug #40).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The error messages when reading faulty SGF files no longer contain line numbers
+because the current implementation doesn't handle Windows-style line
+endings correctly.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The View/Shell menu was not enabled after opening the GTP shell.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.9</revnumber>
+<date>09 Oct 2013</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Fixed writing of invalid SGF files if markups or labels were created on the
+board and then all of them removed before saving the game (bug #38).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Show warning when reading an SGF file with property without values
+instead of rejecting the file (bug #38).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+With analyze commands of type gfx, fill the background of labels on empty
+fields with the field color if the field has both a color and a label.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.8</revnumber>
+<date>09 Jul 2013</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Fixed bug in install.sh, which failed if icon and other data directories did
+not already exist in /usr/local/. Note that the old install.sh might have
+corrupted /usr/local/, which needs to be fixed before installing the new
+version, see https://sourceforge.net/p/gogui/discussion/198965/thread/dd2e1b77/
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.7</revnumber>
+<date>06 Mar 2013</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+gogui.jar no longer contains a Class-Path attribute in its manifest if
+GoGui is compiled with -Dquaqua.ignore=true, which violated the guidelines
+for Fedora packages (bug #37).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Accept ',' for empty points when importing Go text diagrams
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+No longer use xdg-utils in Unix installation script.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Removed vendor prefix from Unix desktop entry file and application icon.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Install SVG icon for GoGui on Unix.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The location of the SetFile executable needed on OS X to create GoGui.app
+can now be specified with the ant option -Dosx.setfile=... This is necessary
+if "ant gogui.app" fails on newer OS X systems because SetFile was
+moved from /Developer/Tools/SetFile to /usr/bin/SetFile.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.6</revnumber>
+<date>07 Oct 2012</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Removed workaround for a bug in Ubuntu 12.04 that made the menu bar
+unreadable in the default Ubuntu theme (Ubuntu bug #932274) because this
+bug is now fixed in Ubuntu 12.10 (OpenJDK 7) and the workaround had
+other side-effects on the menu colors.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.5</revnumber>
+<date>08 Jul 2012</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Added a workaround for a bug in Ubuntu 12.04 that made the menu bar
+unreadable in the default Ubuntu theme (Ubuntu bug #932274).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Use set_free_handicap command to make the Go program aware that handicap is
+used if a SGF file is opened that stores handicaps as a sequence of black
+moves instead of setup properties, like files from the KGS Go server with
+Chinese rules (bug #3529926).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Fixed an assertion that triggered when using a SGF file that used moves left
+properties and an overtime system other than Canadian overtime (which is the
+only overtime system supported by GoGui).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Suppressed some warnings with Java 7 that occurred because some Java classes
+have become generic that were raw before (JComboBox, JList).
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.4</revnumber>
+<date>17 May 2012</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Handle failing of undo commands sent to the Go program in gogui-adapter and
+GoGui (bug #3519829)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-adapter did not use komi from file in loadsgf (bug #3522401)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-adapter: loadsgf loaded the position AFTER move_number (bug #3527339)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Explicitely send "komi 0" command to program if the komi is not defined.
+This avoids that the program uses an old komi for example if first a SGF
+file is loaded that has a komi property and then a file is loaded that
+has no komi property.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Don't use separators in toolbar anymore
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Add StartupWMClass key to desktop entry
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.3</revnumber>
+<date>09 Mar 2012</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Fix broken thumbnail generation on Unix if file name contained
+non-ASCII characters.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Changed Back to Main Variation to go to the last move in the main
+variation that had a variation, not to the last position in the main
+variation.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Workaround for bad taskbar title (java-lang-Thread instead of GoGui)
+with Gnome 3
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+No longer install the gogui-C.omf documentation metadata file on Unix,
+which was the likely cause of problems with the system-wide help system
+on some Linux distributions.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Updated toolbar icon for play command
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.2</revnumber>
+<date>12 Oct 2011</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Fixed bug in Unix install script introduced in version 1.4.1 that made it fail
+when installing the Gnome 3 thumbnailer and the share/thumbnailers directory
+did not already exist.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.1</revnumber>
+<date>11 Oct 2011</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Set file status to modified and enable Save menu item if a label or markup was
+added or changed.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Removed numbers in list menu items (like Recent Files) if the platform
+is Mac because no mnemonics are used on the Mac.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+No longer use window titles in alert dialogs.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Removed duplicate menu access keys
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Avoid unjustified warnings (on standard error) about duplicate access keys in
+menu items.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Make registering thumbnailer for SGF files work in Gnome 3.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.4.0</revnumber>
+<date>08 Aug 2011</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Workaround for exception thrown at startup when GoGui is used with Java
+1.7.0 (bug #3388086)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+No longer support switching the language in "Help/Switch language".
+The language is now always set according to the default system language.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The mnemonic keys in the menu labels are now parsed from the language
+resource files using the Qt convention (the mnemonic is marked with a
+preceding '&#38;'). This avoids that non-English languages use the menmonics
+from the English labels that may not exist in the non-English label.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-twogtp: new option -debugtocomment
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+No longer display a warning if the Go engine sends empty lines outside
+responses, which is allowed by GTP (version 2, draft 2, section 2.9).
+Fixes bug #3351774.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Show meaningful error messages when compiling GoGui with ant and the local
+copies of the Docbook DTD or XSL files are not found.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Added German translation of the Windows installer.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The Windows installer now optionally installs the source code of GoGui.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New option -s for the Unix install script to specify sysconfdir.
+Default changed to /usr/local/etc.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.3.0</revnumber>
+<date>25 Mar 2011</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+The checkbox menu item "View/Variation Labels" was replaced by a submenu
+with the items "Children", "Siblings", "None"
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New menu item: View/Move Numbers
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Ignore leading '>' characters when importing text positions to support
+quotations in emails
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Assume that non-square positions are anchored at lower-left corner when
+importing text positions
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The Windows installer now installs exe wrappers for the GoGui jar files
+(created with Launch4j, see ant targets nsis and l4j).
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-terminal: New command line option -color
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-twogtp: New command line option -threads
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The Docbook XSL stylesheets are no longer included in the GoGui sources.
+To compile GoGui, they need to be installed on the system.
+The location of the directory can be given with the ant option
+-Ddocbook-xsl.dir=directory.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+The full Quaqua sources are no longer included in compiled GoGui distributions,
+only the file quaqua.jar. GoGui can be compiled without Quaqua with the
+ant option -Dquaqua.ignore=true
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+A source distribution of GoGui that contains no bytecode files can be
+created with the new ant target dist-src.
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.2</revnumber>
+<date>28 Feb 2010</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Use more meaningful system properties for displaying the Java runtime name
+and version in the about and crash dialog
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Look for strings like "Black to play" when importing positions from text
+diagrams.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+TwoGtp: use a lock file to check that TwoGtp is not already running with the
+same result file.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+TwoGtp: write game number to standard error at beginning of a game, if option
+-verbose is used.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New menu item Find Next Comment
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Fix parsing of OT property in SGF files that erroneously interpreted Japanese
+byoyomi as Canadian overtime (which is currently the only time system supported
+by GTP and GoGui)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Allow to use Reattach Parameters if program is dead but parameter snapshot
+exists
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+GoGuiAdapter: forward kgs-genmove_cleanup to the program if it supports it
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Add notes about OpenJDK and Ubuntu 9.10 in the README file.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Don't synchronize the program with GTP commands immediately after navigation
+in the game tree but only when needed. This speeds up navigation and keeps
+the GTP log shorter.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Simplify context menu of a point on the board by removing analyze commands
+with point argument
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Support multi-line text in analyze commands of type gfx
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New checkbox Reuse text window in analyze dialog
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New menu item: Import SGF from Clipboard
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New menu items: Snapshot Parameters, Restore Parameters
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Enable parameter commands in menu only if the currently attached program
+has analyze commands of type "param"
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+System look and feel is now used by default on Linux, since the GTK-based
+system look and feel in newer versions on the JRE has good usability now;
+the JGoodies Looks look and feel is no longer used
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+No longer install MIME type definition for KDE 3 in installation script on
+Unix; new version of KDE now support the standard shared MIME database from
+freedesktop.org
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Default installation directory in install.sh is now /usr/local
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+<revision>
+<revnumber>1.1</revnumber>
+<date>09 Jul 2008</date>
+<authorinitials>enz</authorinitials>
+<revdescription>
+<itemizedlist>
+<listitem>
+<simpara>
+Use Java 5 language features; older Java versions are no longer supported.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Remove the GmpToGtp adapter, because the Go Modem Protocol and usage of
+serial ports have become quite obsolete. Should there still be use cases, then
+a version of GmpToGtp from previous GoGui releases can still be used in
+combination with a newer version of the GoGui interface.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Use uppercase letters for color arguments in GTP commands (like play or
+gogui-setup). This was changed for consistency with the convention in the user
+interface. It could break programs that do not treat colors in a
+case-insensitive way (in violation of the GTP specification). Such programs can
+still be used by wrapping their invocation with GtpAdapter with the option
+-lowercase.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Move menu item Reattach Program from Program to Tools menu.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New menu items Tools / Save Parameters and Reattach With Parameters.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Show stderr output of program in GTP shell, even if the engine is not
+processing a command (e.g. because it is pondering while waiting for the
+next command)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+New menu item File / Export / PNG Image.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+GoGui: handle Go games in XML format. TwoGtp: new option -xml.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+GoGui: mark points on board if text is selected in the GtpShell that
+contains points (like it is already done with text selection in comment
+or in text windows created by analyze commands)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+GoGui: option -analyze is no longer supported
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+GtpAdapter: option -resign is no longer supported
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Rename command line tools using prefix gogui- to avoid conflict with
+tools from other packages.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Replace sgftotex by gogui-convert, which can read SGF or XML files and
+supports several output formats
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Fast forward or backward if shift key is pressed while the mouse wheel is used
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-thumbnail: new option -scale
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-twogtp: also measure real time used by programs.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+gogui-statistics: new option -random
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Automatically restore clock to current node, if it was never running.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Partial translation of the user interface into German. New menu item
+Help/Switch Language to select the default language.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Ask user whether to continue, if a command in a file sent with "Send File"
+fails.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Use orange color for standard error lines in GTP Shell that start with
+"warning:"
+</simpara>
+</listitem>
+</itemizedlist>
+</revdescription>
+</revision>
+
+</revhistory>
+</para>
+</appendix>

@@ -1,0 +1,21 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Appendix D. Trouble Shooting</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="index.html" title="GoGui Documentation"><link rel="prev" href="news.html" title="Appendix C. Release Notes"><link rel="next" href="donations.html" title="Appendix E. Support this Project"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix D. Trouble Shooting</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="news.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="donations.html">Next</a></td></tr></table><hr></div><div class="appendix"><div class="titlepage"><div><div><h1 class="title"><a name="bugs"></a>Appendix D. Trouble Shooting</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="bugs.html#idp1276007868">Slow navigation to end or beginning of game</a></span></dt><dt><span class="section"><a href="bugs.html#idp1276040516">Standard error and output of the GTP engine are displayed in wrong order</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1276007868"></a>Slow navigation to end or beginning of game</h2></div></div></div><p>
+This happens while going forward or backward for a large number of moves in a
+game.
+Since Java offers no stream selectors for file streams, GoGui needs to use
+thread synchronization to read the output and error stream of the Go program
+for preserving the correct order of the received output in the GTP shell and
+for detecting timeouts.
+This synchronization can become slow if there are other CPU intensive
+background processes running on the computer.
+The problem can be avoided if the Go engine implements the
+<span class="command"><strong>gg-undo</strong></span> and <span class="command"><strong>gogui-play_sequence</strong></span> commands
+(see <a class="xref" href="compatibility.html" title="Chapter 3. Compatibility">Chapter 3, <i>Compatibility</i></a>), then a single command can replace up to
+several hundred <span class="command"><strong>play</strong></span> or <span class="command"><strong>undo</strong></span> commands.
+</p><p></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1276040516"></a>Standard error and output of the GTP engine are displayed in wrong order</h2></div></div></div><p>
+Due to deficiencies in the Java library, it cannot be guaranteed that the
+standard error and standard output of the GTP engine are always displayed in
+the correct order in the GTP shell. In cases where the order is critical for
+debugging purposes, it is better to invoke GoGui from a terminal with the
+<code class="option">-verbose</code> option and watch the logging of the GTP streams
+in the terminal.
+</p><p></p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="news.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="donations.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Appendix C. Release Notes </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix E. Support this Project</td></tr></table></div></body></html>

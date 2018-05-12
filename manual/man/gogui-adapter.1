@@ -1,0 +1,135 @@
+'\" t
+.\"     Title: gogui-adapter
+.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 05/12/2018
+.\"    Manual: GoGui Reference
+.\"    Source: GoGui 1.4.10
+.\"  Language: English
+.\"
+.TH "GOGUI\-ADAPTER" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+gogui-adapter \- Go Text Protocol adapter for logging or protocol translations\&.
+.SH "SYNOPSIS"
+.HP \w'\fBgogui\-adapter\fR\ 'u
+\fBgogui\-adapter\fR [\fB\-config\fR\ \fIfile\fR] [\fB\-fillpasses\fR] [\fB\-gtpfile\fR\ \fIfile\fR] [\fB\-log\fR\ \fIfile\fR] [\fB\-lowercase\fR] [\fB\-name\fR\ \fIname\fR] [\fB\-noscore\fR] [\fB\-size\fR\ \fIn\fR] [\fB\-verbose\fR] [\fB\-version1\fR] \fIprogram\fR
+.HP \w'\fBgogui\-adapter\fR\ 'u
+\fBgogui\-adapter\fR \fB\-help\fR
+.HP \w'\fBgogui\-adapter\fR\ 'u
+\fBgogui\-adapter\fR \fB\-version\fR
+.SH "DESCRIPTION"
+.PP
+Go Text Protocol adapter for logging or protocol translations\&. The argument
+\fIprogram\fR
+is a command line for the Go program \&.
+.PP
+The adapter keeps its own board state and handles all commands that change the board state by translating them into appropriate commands for the actual Go engine\&. This can be used to do GTP protocol translations between version 1 and version 2 controllers and engines, or for emulating commands that the engine does not support\&. For instance, if the engine does not support
+\fBundo\fR, the adapter will send a clear board command followed by a sequence of moves up to the previous position\&. The command
+\fBloadsgf\fR
+is always handled by the adapter and translated into a sequence of
+\fBplay\fR
+commands (or
+\fBgogui\-setup\fR, if supported by the program)\&. The command is also registered as
+\fBloadxml\fR
+and is able to handle file arguments that are in Jago\*(Aqs XML format\&.
+.SH "OPTIONS"
+.PP
+\fB\-config\fR \fIfile\fR
+.RS 4
+Read command line options and arguments from the given file\&.
+.RE
+.PP
+\fB\-fillpasses\fR
+.RS 4
+Fill non\-alternating moves with pass moves (for programs that can only handle move sequences with alternating color)\&.
+.RE
+.PP
+\fB\-gtpfile\fR \fIfile\fR
+.RS 4
+Send GTP commands from file to program at startup\&. The file may not contain commands that change the board state\&.
+.RE
+.PP
+\fB\-help\fR
+.RS 4
+Display help and exit\&.
+.RE
+.PP
+\fB\-log\fR \fIfile\fR
+.RS 4
+Log the GTP stream to a file (the stream of the adapter program, not the one from the adapter to the Go program)\&.
+.RE
+.PP
+\fB\-lowercase\fR
+.RS 4
+Translate move commands to lower\-case\&. The GTP standards requires case\-insensitive parsing of moves, but some programs can handle only lower\-case\&.
+.RE
+.PP
+\fB\-name\fR \fIname\fR
+.RS 4
+Name used for answering the
+\fBname\fR
+command\&. If the name contains a colon, the part after the colon is interpreted as a version and used for answering the
+\fBversion\fR
+command\&.
+.RE
+.PP
+\fB\-noscore\fR
+.RS 4
+Hide the
+\fBfinal_score\fR
+and
+\fBfinal_status_list\fR
+commands, even if the program supports them\&.
+.RE
+.PP
+\fB\-size\fR \fIn\fR
+.RS 4
+Board size at startup\&. Default is 19\&.
+.RE
+.PP
+\fB\-verbose\fR
+.RS 4
+Print the GTP stream from the adapter to the Go program to standard error\&.
+.RE
+.PP
+\fB\-version\fR
+.RS 4
+Print version and exit\&.
+.RE
+.PP
+\fB\-version1\fR
+.RS 4
+Sets, whether gogui\-adapter reports protocol version 1 in response to the
+\fBprotocol_version\fR
+command and implements version 1 commands\&.
+.RE
+.SH "GTP EXTENSIONS"
+.PP
+.PP
+\fBgogui\-adapter\-showboard\fR
+.RS 4
+Show the internal Go board\&. This is different from the
+\fBshowboard\fR
+command, which is forwarded to the Go program, if it supports it\&.
+.RE
+.PP
+

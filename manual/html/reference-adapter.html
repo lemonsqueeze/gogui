@@ -1,0 +1,76 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>gogui-adapter</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="appendix-reference.html" title="Appendix A. Reference"><link rel="prev" href="reference-gogui.html" title="gogui"><link rel="next" href="reference-client.html" title="gogui-client"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">gogui-adapter</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="reference-gogui.html">Prev</a> </td><th width="60%" align="center">Appendix A. Reference</th><td width="20%" align="right"> <a accesskey="n" href="reference-client.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="reference-adapter"></a><div class="titlepage"></div><div class="refnamediv"><h2><span class="refentrytitle">gogui-adapter</span></h2><p>gogui-adapter — 
+Go Text Protocol adapter for logging or protocol translations.
+</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">gogui-adapter</code>  [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-fillpasses</code>] [<code class="option">-gtpfile</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-log</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-lowercase</code>] [<code class="option">-name</code> <em class="replaceable"><code>name</code></em>] [<code class="option">-noscore</code>] [<code class="option">-size</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-verbose</code>] [<code class="option">-version1</code>]  <em class="replaceable"><code>program</code></em> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-adapter</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-adapter</code>   <code class="option">-version</code> </p></div></div><div class="refsection"><a name="idp1275155092"></a><h2>Description</h2><p>
+Go Text Protocol adapter for logging or protocol translations.
+The argument <em class="replaceable"><code>program</code></em> is a command line
+for the Go program .
+</p><p>
+The adapter keeps its own board state and handles all commands that change
+the board state by translating them into appropriate commands for the
+actual Go engine. This can be used to do GTP protocol translations between
+version 1 and version 2 controllers and engines, or for emulating commands that
+the engine does not support. For instance, if the engine does not support
+<span class="command"><strong>undo</strong></span>, the adapter will send a clear board command followed
+by a sequence of moves up to the previous position.
+The command <span class="command"><strong>loadsgf</strong></span> is always handled by the adapter
+and translated into a sequence of <span class="command"><strong>play</strong></span> commands
+(or <span class="command"><strong>gogui-setup</strong></span>, if supported by the program).
+The command is also registered as <span class="command"><strong>loadxml</strong></span> and is able to
+handle file arguments that are in Jago's XML format.
+</p></div><div class="refsection"><a name="idp1275158444"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+<code class="option">-config</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Read command line options and arguments from the given file.
+</p></dd><dt><span class="term"><code class="option">-fillpasses</code></span></dt><dd><p>
+Fill non-alternating moves with pass moves (for programs that
+can only handle move sequences with alternating color).
+</p></dd><dt><span class="term">
+<code class="option">-gtpfile</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Send GTP commands from file to program at startup. The file may not contain
+commands that change the board state.
+</p></dd><dt><span class="term"><code class="option">-help</code></span></dt><dd><p>
+Display help and exit.
+</p></dd><dt><span class="term">
+<code class="option">-log</code> <em class="replaceable"><code>file</code></em>
+</span></dt><dd><p>
+Log the GTP stream to a file
+(the stream of the adapter program,
+not the one from the adapter to the Go program).
+</p></dd><dt><span class="term"><code class="option">-lowercase</code></span></dt><dd><p>
+Translate move commands to lower-case.
+The GTP standards requires case-insensitive parsing of moves,
+but some programs can handle only lower-case.
+</p></dd><dt><span class="term">
+<code class="option">-name</code> <em class="replaceable"><code>name</code></em>
+</span></dt><dd><p>
+Name used for answering the <span class="command"><strong>name</strong></span> command.
+If the name contains a colon, the part after the colon
+is interpreted as a version and used for answering the
+<span class="command"><strong>version</strong></span> command.
+</p></dd><dt><span class="term">
+<code class="option">-noscore</code>
+</span></dt><dd><p>
+Hide the <span class="command"><strong>final_score</strong></span> and
+<span class="command"><strong>final_status_list</strong></span> commands, even if the program supports
+them.
+</p></dd><dt><span class="term">
+<code class="option">-size</code> <em class="replaceable"><code>n</code></em>
+</span></dt><dd><p>
+Board size at startup. Default is 19.
+</p></dd><dt><span class="term"><code class="option">-verbose</code></span></dt><dd><p>
+Print the GTP stream from the adapter to the Go program to standard error.
+</p></dd><dt><span class="term"><code class="option">-version</code></span></dt><dd><p>
+Print version and exit.
+</p></dd><dt><span class="term"><code class="option">-version1</code></span></dt><dd><p>
+Sets, whether gogui-adapter reports protocol version 1 in response to the
+<span class="command"><strong>protocol_version</strong></span> command and implements version 1 commands.
+</p></dd></dl></div></div><div class="refsection"><a name="idp1275173348"></a><h2>GTP Extensions</h2><p>
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="command"><strong>gogui-adapter-showboard</strong></span></span></dt><dd><p>
+Show the internal Go board.
+This is different from the <span class="command"><strong>showboard</strong></span> command,
+which is forwarded to the Go program, if it supports it.
+</p></dd></dl></div><p>
+</p><p>
+
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="reference-gogui.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="appendix-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="reference-client.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">gogui </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> gogui-client</td></tr></table></div></body></html>
