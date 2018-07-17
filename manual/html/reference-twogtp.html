@@ -2,7 +2,7 @@
 Go Text Protocol adapter for playing games between two Go programs.
 </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-black</code> <em class="replaceable"><code>command</code></em>
      <code class="option">-white</code> <em class="replaceable"><code>command</code></em>
-    [<code class="option">-alternate</code>] [<code class="option">-auto</code>] [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-debugtocomment</code>] [<code class="option">-force</code>] [<code class="option">-games</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-komi</code> <em class="replaceable"><code>komi</code></em>] [<code class="option">-maxmoves</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-observer</code> <em class="replaceable"><code>command</code></em>] [<code class="option">-openings</code> <em class="replaceable"><code>dir</code></em>] [<code class="option">-referee</code> <em class="replaceable"><code>command</code></em>] [<code class="option">-sgffile</code> <em class="replaceable"><code>prefix</code></em>] [<code class="option">-size</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-threads</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-time</code> <em class="replaceable"><code>timespec</code></em>] [<code class="option">-verbose</code>] [<code class="option">-xml</code>]</p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-analyze</code>   <em class="replaceable"><code>file.dat</code></em>  [<code class="option">-force</code>]</p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-compare</code>   <em class="replaceable"><code>file.sgf</code></em>... </p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-version</code> </p></div></div><div class="refsection"><a name="idp1275732588"></a><h2>Description</h2><p>
+    [<code class="option">-alternate</code>] [<code class="option">-auto</code>] [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-debugtocomment</code>] [<code class="option">-force</code>] [<code class="option">-games</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-komi</code> <em class="replaceable"><code>komi</code></em>] [<code class="option">-handicap</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-maxmoves</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-observer</code> <em class="replaceable"><code>command</code></em>] [<code class="option">-openings</code> <em class="replaceable"><code>dir</code></em>] [<code class="option">-referee</code> <em class="replaceable"><code>command</code></em>] [<code class="option">-sgffile</code> <em class="replaceable"><code>prefix</code></em>] [<code class="option">-size</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-threads</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-time</code> <em class="replaceable"><code>timespec</code></em>] [<code class="option">-verbose</code>] [<code class="option">-xml</code>]</p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-analyze</code>   <em class="replaceable"><code>file.dat</code></em>  [<code class="option">-force</code>]</p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-compare</code>   <em class="replaceable"><code>file.sgf</code></em>... </p></div><div class="cmdsynopsis"><p><code class="command">gogui-twogtp</code>   <code class="option">-version</code> </p></div></div><div class="refsection"><a name="idp1255541276"></a><h2>Description</h2><p>
 Adapter program for playing games between two Go programs
 supporting GTP (Go Text Protocol).
 </p><p>
@@ -11,7 +11,7 @@ game and answering commands related to the final game score.
 <span class="application">TwoGtp</span> forwards the following commands to all
 programs (command translation is done for protocol version 1 programs):
 
-</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><span class="command"><strong>boardsize</strong></span></li><li class="listitem"><span class="command"><strong>clear_board</strong></span></li><li class="listitem"><span class="command"><strong>komi</strong></span> (if supported)</li><li class="listitem"><span class="command"><strong>play</strong></span></li><li class="listitem"><span class="command"><strong>quit</strong></span></li><li class="listitem"><span class="command"><strong>scoring_system</strong></span> (if supported)</li><li class="listitem"><span class="command"><strong>time_settings</strong></span> (if supported)</li><li class="listitem"><span class="command"><strong>undo</strong></span></li></ul></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><span class="command"><strong>boardsize</strong></span></li><li class="listitem"><span class="command"><strong>clear_board</strong></span></li><li class="listitem"><span class="command"><strong>komi</strong></span> (if supported)</li><li class="listitem"><span class="command"><strong>fixed_handicap</strong></span></li><li class="listitem"><span class="command"><strong>play</strong></span></li><li class="listitem"><span class="command"><strong>quit</strong></span></li><li class="listitem"><span class="command"><strong>scoring_system</strong></span> (if supported)</li><li class="listitem"><span class="command"><strong>time_settings</strong></span> (if supported)</li><li class="listitem"><span class="command"><strong>undo</strong></span></li></ul></div><p>
 
 The following commands are forwarded to the referee program, if existing,
 otherwise to first player program that implements them
@@ -38,7 +38,7 @@ The errors in the statistics are the standard errors
 results, divided by the square root of the number of unique games, which is
 correct only for a sufficiently large number of games (especially if the
 percentage of wins is close to 0% or 100%).
-</p></div><div class="refsection"><a name="idp1275743844"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="option">-alternate</code></span></dt><dd><p>
+</p></div><div class="refsection"><a name="idp1255553100"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="option">-alternate</code></span></dt><dd><p>
 Alternate colors. Black and White are exchanged every odd game;
 the scores saved in the results table <code class="option">-sgffile</code>
 are still using the name Black and White as given with
@@ -82,6 +82,8 @@ Komi. If this option is not used, a default komi of 6.5 will be used.
 The komi cannot be changed at runtime. The <span class="command"><strong>komi</strong></span> GTP
 command will succeed if the argument has the same value as the configured
 komi and fail otherwise.
+</p></dd><dt><span class="term"><code class="option">-handicap</code> <em class="replaceable"><code>handicap</code></em></span></dt><dd><p>
+Number of handicap stones (default none).
 </p></dd><dt><span class="term"><code class="option">-maxmoves</code> <em class="replaceable"><code>n</code></em></span></dt><dd><p>
 Limit the maximum number of moves. Can be useful if some games would not
 terminate otherwise. Default is 1000. -1 means no limit.
@@ -136,7 +138,7 @@ Print version and exit.
 Command for the white program.
 </p></dd><dt><span class="term"><code class="option">-xml</code></span></dt><dd><p>
 Save games in XML format.
-</p></dd></dl></div></div><div class="refsection"><a name="idp1275776412"></a><h2>GTP Extensions</h2><p>
+</p></dd></dl></div></div><div class="refsection"><a name="idp1255586740"></a><h2>GTP Extensions</h2><p>
 </p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="command"><strong>gogui-interrupt</strong></span></span></dt><dd><p>
 Indicate interrupt ability for GoGui.
 <span class="application">TwoGtp</span> will forward the interrupt to both
@@ -164,7 +166,7 @@ Send command to the referee program.
 </span></dt><dd><p>
 Send command to the white player.
 </p></dd></dl></div><p>
-</p></div><div class="refsection"><a name="idp1275785868"></a><h2>Examples</h2><div class="refsection"><a name="idp1275786188"></a><h3>Play games</h3><p>
+</p></div><div class="refsection"><a name="idp1255596196"></a><h2>Examples</h2><div class="refsection"><a name="idp1255596516"></a><h3>Play games</h3><p>
 Play 100 games between GNU Go, default level, and GNU Go, level 5,
 on a 9x9 board, with alternating colors;
 save games and results to files with filename prefix gnugo5:
@@ -177,7 +179,7 @@ gogui-twogtp -black "$BLACK" -white "$WHITE" -games 100 \
   -size 9 -alternate -sgffile gnugo5 -auto
 </code></strong>
 </pre><p>
-</p></div><div class="refsection"><a name="idp1275787924"></a><h3>Analyze results</h3><p>
+</p></div><div class="refsection"><a name="idp1255598252"></a><h3>Analyze results</h3><p>
 Create a HTML formatted result page of the games played in the previous
 section:
 </p><p>
@@ -186,7 +188,7 @@ section:
 gogui-twogtp -analyze gnugo5.dat
 </code></strong>
 </pre><p>
-</p></div><div class="refsection"><a name="idp1275789444"></a><h3>Play one game with graphical display</h3><p>
+</p></div><div class="refsection"><a name="idp1255599772"></a><h3>Play one game with graphical display</h3><p>
 Play one game between GNU Go, default level, and GNU Go, level 5, using GoGui
 as a graphical display
 (to start playing select Computer Color/Both from the Game menu in GoGui):
@@ -198,7 +200,7 @@ WHITE="gnugo --mode gtp --level 5"
 gogui -program "gogui-twogtp -black \"$BLACK\" -white \"$WHITE\""
 </code></strong>
 </pre><p>
-</p></div><div class="refsection"><a name="idp1275791204"></a><h3>Play games with graphical display</h3><p>
+</p></div><div class="refsection"><a name="idp1255601532"></a><h3>Play games with graphical display</h3><p>
 Play 100 games with same settings as in the first example, with GoGui
 as a graphical display (start games automatically):
 </p><p>
