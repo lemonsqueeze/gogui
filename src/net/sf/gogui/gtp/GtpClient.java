@@ -93,15 +93,12 @@ public final class GtpClient
         @param workingDirectory The working directory to run the program in or
         null for the current directory
         @param log Log input, output and error stream to standard error.
-        @param callback Callback for external display of the streams. */
+        @param callback Callback for external display of the streams.
+	@param handleStderr Capture/leave alone program standard error. */
     public GtpClient(String program, File workingDirectory, boolean log,
-                     IOCallback callback)
+                     IOCallback callback, boolean handleStderr)
         throws GtpClient.ExecFailed
     {
-        if (workingDirectory != null && ! workingDirectory.isDirectory())
-            throw new ExecFailed(program,
-                                 "Invalid working directory \""
-                                 + workingDirectory + "\"");
         m_log = log;
         m_callback = callback;
         m_wasKilled = false;
@@ -114,6 +111,39 @@ public final class GtpClient
                 program.replaceAll("%SRAND", Integer.toString(rand));
         }
         m_program = program;
+	
+	gtpClientInit(program, workingDirectory, log, callback, handleStderr);
+    }
+
+    /** Constructor (handle program stderr). */
+    public GtpClient(String program, File workingDirectory, boolean log,
+                     IOCallback callback)
+        throws GtpClient.ExecFailed
+    {
+        m_log = log;
+        m_callback = callback;
+        m_wasKilled = false;
+        if (program.indexOf("%SRAND") >= 0)
+        {
+            // RAND_MAX in stdlib.h ist at least 32767
+            int randMax = 32767;
+            int rand = (int)(Math.random() * (randMax + 1));
+            program =
+                program.replaceAll("%SRAND", Integer.toString(rand));
+        }
+        m_program = program;
+	
+	gtpClientInit(program, workingDirectory, log, callback, true);
+    }
+    
+    private void gtpClientInit(String program, File workingDirectory, boolean log,
+			       IOCallback callback, boolean handleStderr)
+        throws GtpClient.ExecFailed
+    {
+        if (workingDirectory != null && ! workingDirectory.isDirectory())
+            throw new ExecFailed(program,
+                                 "Invalid working directory \""
+                                 + workingDirectory + "\"");
         if (StringUtil.isEmpty(program))
             throw new ExecFailed(program,
                                  "Command for invoking Go program must be"
@@ -139,14 +169,20 @@ public final class GtpClient
                 if (file.exists())
                     cmdArray[0] = file.getAbsolutePath();
             }
-            m_process = runtime.exec(cmdArray, null, workingDirectory);
+
+	    ProcessBuilder pb = new ProcessBuilder(cmdArray);
+	    pb.directory(workingDirectory);
+	    if (!handleStderr)
+		pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+	    m_process = pb.start();
         }
         catch (IOException e)
         {
             throw new ExecFailed(program, e);
         }
-        init(m_process.getInputStream(), m_process.getOutputStream(),
-             m_process.getErrorStream());
+
+	InputStream err = (handleStderr ? m_process.getErrorStream() : null);
+	init(m_process.getInputStream(), m_process.getOutputStream(), err);
     }
 
     /** Constructor for given input and output streams. */
@@ -326,7 +362,8 @@ public final class GtpClient
         try
         {
             m_process.waitFor();
-            m_errorThread.join();
+	    if (m_errorThread != null)
+		m_errorThread.join();
             m_inputThread.join();
         }
         catch (InterruptedException e)
@@ -352,7 +389,8 @@ public final class GtpClient
         }
         try
         {
-            m_errorThread.join(timeout);
+	    if (m_errorThread != null)
+		m_errorThread.join(timeout);
             m_inputThread.join(timeout);
         }
         catch (InterruptedException e)
