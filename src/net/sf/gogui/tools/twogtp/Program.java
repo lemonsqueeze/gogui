@@ -16,10 +16,14 @@ import net.sf.gogui.util.Table;
 public class Program
 {
     public Program(String command, String defaultName, String logPrefix,
-                   boolean verbose) throws GtpError
+                   boolean verbose, boolean handleStderr)
+	throws GtpError
     {
         m_defaultName = defaultName;
-        m_gtp = new GtpClient(command, null, verbose, null);
+	if (handleStderr)
+	    m_gtp = new GtpClient(command, null, verbose, null);
+	else  // Leave program stderr alone
+	    m_gtp = new GtpClient(command, null, verbose, null, false);
         m_gtp.setLogPrefix(logPrefix);
         m_synchronizer = new GtpSynchronizer(m_gtp);
         m_gtp.queryProtocolVersion();

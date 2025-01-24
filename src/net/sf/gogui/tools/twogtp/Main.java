@@ -142,11 +142,14 @@ public final class Main
             for (int i = 0; i < numberThreads; ++i)
             {
                 ArrayList<Program> allPrograms = new ArrayList<Program>();
+		// Leave program stderr alone if running without -debugtocomment
+		// Prevents interleaved log files.
+		boolean handleStderr = debugToComment;
                 Program blackProgram =
-                    new Program(black, "Black", "B", verbose);
+                    new Program(black, "Black", "B", verbose, handleStderr);
                 allPrograms.add(blackProgram);
                 Program whiteProgram =
-                    new Program(white, "White", "W", verbose);
+                    new Program(white, "White", "W", verbose, handleStderr);
                 allPrograms.add(whiteProgram);
                 Program refereeProgram;
                 if (referee.equals(""))
@@ -154,7 +157,7 @@ public final class Main
                 else
                 {
                     refereeProgram =
-                        new Program(referee, "Referee", "R", verbose);
+                        new Program(referee, "Referee", "R", verbose, true);
                     allPrograms.add(refereeProgram);
                 }
                 for (Program program : allPrograms)

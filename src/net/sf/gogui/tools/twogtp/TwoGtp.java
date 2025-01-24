@@ -61,7 +61,7 @@ public class TwoGtp
             m_observer = null;
         else
         {
-            m_observer = new Program(observer, "Observer", "O", verbose);
+            m_observer = new Program(observer, "Observer", "O", verbose, true);
             m_allPrograms.add(m_observer);
         }
         for (Program program : m_allPrograms)
