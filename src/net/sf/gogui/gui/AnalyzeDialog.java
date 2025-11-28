@@ -290,7 +290,14 @@ public final class AnalyzeDialog
     private JPanel createCommandPanel()
     {
         JPanel panel = new JPanel(new BorderLayout());
-        m_list = new JList();
+        m_list = new JList() {
+            public String getToolTipText(MouseEvent me) {
+                int index = locationToIndex(me.getPoint());
+                if (index > -1)
+                    return m_commands.get(index).getToolTip();
+                return null;
+            }
+        };
         m_list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         m_list.setVisibleRowCount(25);
         m_list.addMouseListener(new MouseAdapter() {

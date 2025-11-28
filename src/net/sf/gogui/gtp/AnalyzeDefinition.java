@@ -69,13 +69,18 @@ public class AnalyzeDefinition
             m_type = AnalyzeType.NONE;
         m_label = array[1];
         m_command = array[2];
+        if (array.length == 4)
+	    m_tooltip = array[3];
+        else
+	    m_tooltip = null;
     }
 
-    public AnalyzeDefinition(AnalyzeType type, String label, String command)
+    public AnalyzeDefinition(AnalyzeType type, String label, String command, String tooltip)
     {
         m_type = type;
         m_label = label;
         m_command = command;
+        m_tooltip = tooltip;
     }
 
     public String getCommand()
@@ -86,6 +91,11 @@ public class AnalyzeDefinition
     public String getLabel()
     {
         return m_label;
+    }
+
+    public String getToolTip()
+    {
+        return m_tooltip;
     }
 
     public AnalyzeType getType()
@@ -232,6 +242,8 @@ public class AnalyzeDefinition
     private final String m_label;
 
     private final String m_command;
+
+    private final String m_tooltip;
 
     private static ArrayList<AnalyzeDefinition>
         readConfig(BufferedReader reader, String name,
