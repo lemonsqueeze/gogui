@@ -2485,6 +2485,24 @@ public class GoGui
                 showStatus(title);
             if (checkComputerMove)
                 checkComputerMove();
+	    if (m_analyzeCommand.isReloadType()) {
+		try
+		{   // Get new analyze commands list from program
+		    String programAnalyzeCommands = GtpClientUtil.getAnalyzeCommands(m_gtp);
+		    m_analyzeCommands = AnalyzeDefinition.read(m_gtp.getSupportedCommands(),
+							       m_analyzeCommandsFile,
+							       programAnalyzeCommands);
+		}
+		catch (ErrorMessage e)
+		{
+		    showError(i18n("MSG_COULD_NOT_READ_ANALYZE_CONFIGURATION"), e);
+		}
+
+		// Recreate analyze window
+		actionDisposeAnalyzeDialog();
+		actionShowAnalyzeDialog();
+		return;
+	    }
         }
         catch (GtpResponseFormatError e)
         {

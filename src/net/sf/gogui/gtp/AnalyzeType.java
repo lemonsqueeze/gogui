@@ -44,5 +44,7 @@ public enum AnalyzeType
 
     VARPO,
 
-    VARW
+    VARW,
+
+    RELOAD
 }

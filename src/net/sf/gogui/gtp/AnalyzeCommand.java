@@ -92,6 +92,11 @@ public class AnalyzeCommand
         return m_definition.isTextType();
     }
 
+    public boolean isReloadType()
+    {
+        return m_definition.isReloadType();
+    }
+
     public boolean needsColorArg()
     {
         return m_definition.needsColorArg();

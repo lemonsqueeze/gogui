@@ -63,6 +63,8 @@ public class AnalyzeDefinition
             m_type = AnalyzeType.VARPO;
         else if (typeStr.equals("varw"))
             m_type = AnalyzeType.VARW;
+        else if (typeStr.equals("reload"))
+            m_type = AnalyzeType.RELOAD;
         else
             m_type = AnalyzeType.NONE;
         m_label = array[1];
@@ -107,6 +109,11 @@ public class AnalyzeDefinition
             || m_type == AnalyzeType.VARB
             || m_type == AnalyzeType.VARP
             || m_type == AnalyzeType.VARPO;
+    }
+
+    public boolean isReloadType()
+    {
+	 return (m_type == AnalyzeType.RELOAD);
     }
 
     public boolean needsColorArg()

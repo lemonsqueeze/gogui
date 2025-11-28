@@ -328,6 +328,22 @@ Like <userinput>var</userinput>, but White is assumed to move first.
 </listitem>
 </varlistentry>
 
+<varlistentry>
+<term><userinput>reload</userinput></term>
+<listitem>
+<simpara>
+  Refresh analyze dialog after running command, allowing program to change its
+  content dynamically. Program will get asked again about commands to display
+  through <command>gogui-analyze_commands</command> like on startup, which he
+  may choose to answer differently based on some state.
+  Can be used to implement things like menu navigation or folding / unfolding
+  items within the analyze dialog should there be a need to organize things
+  better, or different modes with their own specific analyze commands without
+  having to reload program with different parameters each time.
+</simpara>
+</listitem>
+</varlistentry>
+
 </variablelist>
 </para>
 </section>
