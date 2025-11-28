@@ -1,8 +1,8 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 3. Compatibility</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="index.html" title="GoGui Documentation"><link rel="prev" href="programs.html" title="Chapter 2. Programs"><link rel="next" href="menubar.html" title="Chapter 4. Main Window"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. Compatibility</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="programs.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="menubar.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="compatibility"></a>Chapter 3. Compatibility</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="compatibility.html#idp1274439884">Required Commands</a></span></dt><dt><span class="section"><a href="compatibility.html#idp1274510916">Optional Commands</a></span></dt></dl></div><a class="indexterm" name="idp1274442964"></a><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 3. Compatibility</title><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="index.html" title="GoGui Documentation"><link rel="prev" href="programs.html" title="Chapter 2. Programs"><link rel="next" href="menubar.html" title="Chapter 4. Main Window"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. Compatibility</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="programs.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="menubar.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="compatibility"></a>Chapter 3. Compatibility</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="compatibility.html#id1354">Required Commands</a></span></dt><dt><span class="section"><a href="compatibility.html#id1355">Optional Commands</a></span></dt></dl></div><a class="indexterm" name="id1593"></a><p>
 GoGui will work with all programs that can understand the most basic commands
 of version 1 or 2 of the
 <a class="ulink" href="http://www.lysator.liu.se/~gunnar/gtp/" target="_top">Go Text Protocol</a>.
-</p><p></p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1274439884"></a>Required Commands</h2></div></div></div><p>
+</p><p></p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id1354"></a>Required Commands</h2></div></div></div><p>
 It is required that the Go program can handle the following commands:
 </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
 <span class="command"><strong>boardsize</strong></span>, <span class="command"><strong>clear_board</strong></span>
@@ -26,7 +26,7 @@ that the engine should not be made playing moves automatically.
 Since the user can still issue play commands, it is recommended that the
 engine responds to a <span class="command"><strong>genmove</strong></span> command with a meaningful
 failure response.
-</p><p></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp1274510916"></a>Optional Commands</h2></div></div></div><p>
+</p><p></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id1355"></a>Optional Commands</h2></div></div></div><p>
 The following other commands are used by GoGui:
 </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
 <span class="command"><strong>name</strong></span>
@@ -68,7 +68,10 @@ to undo multiple moves.
 </p><p>
 The following GoGui specific GTP extension commands are used if supported by
 the program:
-</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="command"><strong>gogui-analyze_commands</strong></span></span></dt><dd><p>
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="command"><strong>gogui-version</strong></span></span></dt><dd><p>
+Sent to program on startup so it can know what version of GoGui it's
+running in. Syntax will be like: "gogui-version 1.4.12".
+</p></dd><dt><span class="term"><span class="command"><strong>gogui-analyze_commands</strong></span></span></dt><dd><p>
 See <a class="xref" href="analyze.html" title="Chapter 7. Analyze Commands">Chapter 7, <i>Analyze Commands</i></a>.
 </p></dd><dt><span class="term"><span class="command"><strong>gogui-interrupt</strong></span></span></dt><dd><p>
 See <a class="xref" href="interrupt.html" title="Chapter 10. Interrupting Commands">Chapter 10, <i>Interrupting Commands</i></a>.

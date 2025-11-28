@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: gogui-twogtp
-.\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 05/12/2018
+.\"    Author: [FIXME: author] [see http://www.docbook.org/tdg5/en/html/author]
+.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
+.\"      Date: 11/28/2025
 .\"    Manual: GoGui Reference
-.\"    Source: GoGui 1.4.10
+.\"    Source: GoGui 1.4.12
 .\"  Language: English
 .\"
-.TH "GOGUI\-TWOGTP" "1" "05/12/2018" "GoGui 1\&.4\&.10" "GoGui Reference"
+.TH "GOGUI\-TWOGTP" "1" "11/28/2025" "GoGui 1\&.4\&.12" "GoGui Reference"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,7 +31,7 @@
 gogui-twogtp \- Go Text Protocol adapter for playing games between two Go programs\&.
 .SH "SYNOPSIS"
 .HP \w'\fBgogui\-twogtp\fR\ 'u
-\fBgogui\-twogtp\fR \fB\-black\fR\ \fIcommand\fR \fB\-white\fR\ \fIcommand\fR [\fB\-alternate\fR] [\fB\-auto\fR] [\fB\-config\fR\ \fIfile\fR] [\fB\-debugtocomment\fR] [\fB\-force\fR] [\fB\-games\fR\ \fIn\fR] [\fB\-komi\fR\ \fIkomi\fR] [\fB\-maxmoves\fR\ \fIn\fR] [\fB\-observer\fR\ \fIcommand\fR] [\fB\-openings\fR\ \fIdir\fR] [\fB\-referee\fR\ \fIcommand\fR] [\fB\-sgffile\fR\ \fIprefix\fR] [\fB\-size\fR\ \fIn\fR] [\fB\-threads\fR\ \fIn\fR] [\fB\-time\fR\ \fItimespec\fR] [\fB\-verbose\fR] [\fB\-xml\fR]
+\fBgogui\-twogtp\fR \fB\-black\fR\ \fIcommand\fR \fB\-white\fR\ \fIcommand\fR [\fB\-alternate\fR] [\fB\-auto\fR] [\fB\-config\fR\ \fIfile\fR] [\fB\-debugtocomment\fR] [\fB\-force\fR] [\fB\-games\fR\ \fIn\fR] [\fB\-komi\fR\ \fIkomi\fR] [\fB\-handicap\fR\ \fIn\fR] [\fB\-maxmoves\fR\ \fIn\fR] [\fB\-observer\fR\ \fIcommand\fR] [\fB\-openings\fR\ \fIdir\fR] [\fB\-referee\fR\ \fIcommand\fR] [\fB\-sgffile\fR\ \fIprefix\fR] [\fB\-size\fR\ \fIn\fR] [\fB\-threads\fR\ \fIn\fR] [\fB\-time\fR\ \fItimespec\fR] [\fB\-verbose\fR] [\fB\-xml\fR]
 .HP \w'\fBgogui\-twogtp\fR\ 'u
 \fBgogui\-twogtp\fR \fB\-help\fR
 .HP \w'\fBgogui\-twogtp\fR\ 'u
@@ -80,6 +80,17 @@ forwards the following commands to all programs (command translation is done for
 .\}
 \fBkomi\fR
 (if supported)
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+\fBfixed_handicap\fR
 .RE
 .sp
 .RS 4
@@ -263,6 +274,11 @@ Display help and exit\&.
 Komi\&. If this option is not used, a default komi of 6\&.5 will be used\&. The komi cannot be changed at runtime\&. The
 \fBkomi\fR
 GTP command will succeed if the argument has the same value as the configured komi and fail otherwise\&.
+.RE
+.PP
+\fB\-handicap\fR \fIhandicap\fR
+.RS 4
+Number of handicap stones (default none)\&.
 .RE
 .PP
 \fB\-maxmoves\fR \fIn\fR

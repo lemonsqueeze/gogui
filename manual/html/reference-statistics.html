@@ -1,9 +1,9 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>gogui-statistics</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="appendix-reference.html" title="Appendix A. Reference"><link rel="prev" href="reference-server.html" title="gogui-server"><link rel="next" href="reference-terminal.html" title="gogui-terminal"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">gogui-statistics</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="reference-server.html">Prev</a> </td><th width="60%" align="center">Appendix A. Reference</th><td width="20%" align="right"> <a accesskey="n" href="reference-terminal.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="reference-statistics"></a><div class="titlepage"></div><div class="refnamediv"><h2><span class="refentrytitle">gogui-statistics</span></h2><p>gogui-statistics — 
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>gogui-statistics</title><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot"><link rel="home" href="index.html" title="GoGui Documentation"><link rel="up" href="appendix-reference.html" title="Appendix A. Reference"><link rel="prev" href="reference-server.html" title="gogui-server"><link rel="next" href="reference-terminal.html" title="gogui-terminal"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">gogui-statistics</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="reference-server.html">Prev</a> </td><th width="60%" align="center">Appendix A. Reference</th><td width="20%" align="right"> <a accesskey="n" href="reference-terminal.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="reference-statistics"></a><div class="titlepage"></div><div class="refnamediv"><h2><span class="refentrytitle">gogui-statistics</span></h2><p>gogui-statistics — 
 Runs GTP commands on all positions of game collections.
 </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">gogui-statistics</code>  [<code class="option">-backward</code>] [<code class="option">-begin</code> <em class="replaceable"><code>commands</code></em>] [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-commands</code> <em class="replaceable"><code>commands</code></em>] [<code class="option">-final</code> <em class="replaceable"><code>commands</code></em>] [<code class="option">-force</code>] [<code class="option">-min</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-max</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-program</code> <em class="replaceable"><code>program</code></em>] [<code class="option">-quiet</code>] [<code class="option">-random</code>] [<code class="option">-setup</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-size</code> <em class="replaceable"><code>n</code></em>] [<code class="option">-verbose</code>]  
 <em class="replaceable"><code>file.sgf</code></em>
 ... </p></div><div class="cmdsynopsis"><p><code class="command">gogui-statistics</code>   <code class="option">-help</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-statistics</code>   <code class="option">-version</code> </p></div><div class="cmdsynopsis"><p><code class="command">gogui-statistics</code>   <code class="option">-analyze</code>
-  <em class="replaceable"><code>file</code></em>  [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-output</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-precision</code> <em class="replaceable"><code>n</code></em>]</p></div></div><div class="refsection"><a name="idp1275527076"></a><h2>Description</h2><p>
+  <em class="replaceable"><code>file</code></em>  [<code class="option">-config</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-output</code> <em class="replaceable"><code>file</code></em>] [<code class="option">-precision</code> <em class="replaceable"><code>n</code></em>]</p></div></div><div class="refsection"><a name="id3699"></a><h2>Description</h2><p>
 gogui-statistics runs a a set of commands for a Go program supporting the
 Go Text Protocol on each position of Go game collections.
 The results are stored in the text file "gtpstatistics.dat" in table format.
@@ -30,7 +30,7 @@ The color of the move in the game is appended.
 The result is "1", if the result is the same move as played in the game,
 "0" otherwise.
 </p></dd></dl></div><p>
-</p></div><div class="refsection"><a name="idp1275533164"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+</p></div><div class="refsection"><a name="id3725"></a><h2>Options</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">
 <code class="option">-analyze</code> <em class="replaceable"><code>file</code></em>
 </span></dt><dd><p>
 Analyze the result table
@@ -111,7 +111,7 @@ Print the GTP stream to the Go program to standard error.
 <code class="option">-version</code>
 </span></dt><dd><p>
 Print version and exit.
-</p></dd></dl></div></div><div class="refsection"><a name="idp1275555236"></a><h2>Examples</h2><div class="refsection"><a name="idp1275555556"></a><h3>Run gogui-statistics</h3><p>
+</p></dd></dl></div></div><div class="refsection"><a name="id3834"></a><h2>Examples</h2><div class="refsection"><a name="id3836"></a><h3>Run gogui-statistics</h3><p>
 </p><pre class="programlisting">
 <strong class="userinput"><code>
 gogui-statistics -program "gnugo --mode gtp" \
@@ -120,7 +120,7 @@ gogui-statistics -program "gnugo --mode gtp" \
   regression/games/olympiad2004/19x19/*.sgf
 </code></strong>
 </pre><p>
-</p></div><div class="refsection"><a name="idp1275556932"></a><h3>Generate HTML Reports</h3><p>
+</p></div><div class="refsection"><a name="id3841"></a><h3>Generate HTML Reports</h3><p>
 </p><pre class="programlisting">
 <strong class="userinput"><code>
 gogui-statistics -analyze statistics.dat -output statistics/olympiad2004

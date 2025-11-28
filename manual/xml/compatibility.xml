@@ -154,6 +154,15 @@ the program:
 </para>
 
 <variablelist>
+ <varlistentry>
+<term><command>gogui-version</command></term>
+<listitem>
+<para>
+Sent to program on startup so it can know what version of GoGui it's
+running in. Syntax will be like: "gogui-version 1.4.12".
+</para>
+</listitem>
+</varlistentry>
 <varlistentry>
 <term><command>gogui-analyze_commands</command></term>
 <listitem>
