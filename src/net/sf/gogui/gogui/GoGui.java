@@ -2683,6 +2683,10 @@ public class GoGui
                 Program.save(m_programs);
                 m_menuBar.setPrograms(m_programs);
             }
+	    // Send gogui version on startup
+	    if (m_gtp.isSupported("gogui-version"))
+		    m_gtp.send("gogui-version " + Version.get());
+	    // Get supported analyze commands
             try
             {
                 String programAnalyzeCommands
