@@ -2,12 +2,15 @@
 
 package net.sf.gogui.go;
 
+import java.util.Locale;
+
 /** Result of a game.
     Includes information about the score under Chinese and Japanese rules,
     the rules and komi used, territory, area (stones and territory) and
     number of captured stones. */
 public class Score
 {
+    /** XXX only chinese / japanese rules supported right now. */
     public enum ScoringMethod
     {
         /** Constant for area scoring method (Chinese). */
@@ -15,6 +18,26 @@ public class Score
 
         /** Constant for territory scoring method (Japanese). */
         TERRITORY;
+
+        public String toString()
+        {
+                if (this == TERRITORY)
+                        return "japanese";
+                return "chinese";
+        }
+
+        /** Try to parse rules.
+            @return TERRITORY if japanese rules, AREA otherwise. */
+        public static ScoringMethod parseRules(String s)
+        {
+            ScoringMethod rules = AREA;
+            if (s == null)
+                    return rules;
+            s = s.trim().toLowerCase(Locale.ENGLISH);
+            if (s.equals("japanese"))
+                rules = TERRITORY;
+            return rules;
+        }
     }
 
     public int m_areaBlack;

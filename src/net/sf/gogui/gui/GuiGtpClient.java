@@ -9,6 +9,7 @@ import net.sf.gogui.game.TimeSettings;
 import net.sf.gogui.go.ConstBoard;
 import net.sf.gogui.go.Komi;
 import net.sf.gogui.go.Move;
+import net.sf.gogui.go.Score.ScoringMethod;
 import net.sf.gogui.gtp.GtpClient;
 import net.sf.gogui.gtp.GtpClientBase;
 import net.sf.gogui.gtp.GtpError;
@@ -122,12 +123,12 @@ public class GuiGtpClient
         }
     }
 
-    public void initSynchronize(ConstBoard board, Komi komi,
+    public void initSynchronize(ConstBoard board, ScoringMethod rules, Komi komi,
                                 TimeSettings timeSettings) throws GtpError
     {
         assert SwingUtilities.isEventDispatchThread();
         assert ! m_commandInProgress;
-        m_gtpSynchronizer.init(board, komi, timeSettings);
+        m_gtpSynchronizer.init(board, rules, komi, timeSettings);
     }
 
     public boolean isCommandInProgress()
@@ -179,12 +180,12 @@ public class GuiGtpClient
         m_gtp.setAutoNumber(enable);
     }
 
-    public void synchronize(ConstBoard board, Komi komi,
-                            TimeSettings timeSettings) throws GtpError
+    public void synchronize(ConstBoard board, ScoringMethod rules, Komi komi, TimeSettings timeSettings)
+        throws GtpError
     {
         assert SwingUtilities.isEventDispatchThread();
         assert ! m_commandInProgress;
-        m_gtpSynchronizer.synchronize(board, komi, timeSettings);
+        m_gtpSynchronizer.synchronize(board, rules, komi, timeSettings);
     }
 
     public void updateAfterGenmove(ConstBoard board)

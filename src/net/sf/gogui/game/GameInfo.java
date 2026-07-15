@@ -2,7 +2,6 @@
 
 package net.sf.gogui.game;
 
-import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import net.sf.gogui.go.BlackWhiteSet;
@@ -114,15 +113,8 @@ public class GameInfo
         is "japanese", Score.ScoringMethod.AREA otherwise. */
     public ScoringMethod parseRules()
     {
-        ScoringMethod result = AREA;
-        String rules = get(StringInfo.RULES);
-        if (rules != null)
-        {
-            rules = rules.trim().toLowerCase(Locale.ENGLISH);
-            if (rules.equals("japanese"))
-                result = TERRITORY;
-        }
-        return result;
+        String s = get(StringInfo.RULES);
+        return ScoringMethod.parseRules(s);
     }
 
     public void set(StringInfo type, String value)

@@ -509,7 +509,7 @@ public class Statistics
     {
         ConstNode node = game.getGameInfoNode();
         ConstGameInfo info = game.getGameInfo(node);
-        m_synchronizer.synchronize(game.getBoard(), info.getKomi(),
+        m_synchronizer.synchronize(game.getBoard(), info.parseRules(), info.getKomi(),
                                    info.getTimeSettings());
     }
 }

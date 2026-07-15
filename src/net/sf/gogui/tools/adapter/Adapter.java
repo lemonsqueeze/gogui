@@ -28,6 +28,7 @@ import net.sf.gogui.go.InvalidKomiException;
 import net.sf.gogui.go.Komi;
 import net.sf.gogui.go.Move;
 import net.sf.gogui.go.PointList;
+import net.sf.gogui.go.Score.ScoringMethod;
 import net.sf.gogui.gtp.GtpCallback;
 import net.sf.gogui.gtp.GtpClient;
 import net.sf.gogui.gtp.GtpClientBase;
@@ -173,6 +174,19 @@ public class Adapter
         cmd.getResponse().append(BoardUtil.toString(m_board, true, false));
     }
 
+    public void cmdRules(GtpCommand cmd) throws GtpError
+    {
+        try
+        {
+            m_rules = ScoringMethod.parseRules(cmd.getArg());
+            synchronize();
+        }
+        catch (GtpError e)
+        {
+            throw new GtpError("invalid rules");
+        }
+    }
+
     public void cmdKomi(GtpCommand cmd) throws GtpError
     {
         try
@@ -215,6 +229,7 @@ public class Adapter
             BoardUpdater boardUpdater = new BoardUpdater();
             boardUpdater.update(tree, node, m_board);
             m_komi = tree.getGameInfoConst(node).getKomi();
+            m_rules = tree.getGameInfoConst(node).parseRules();
         }
         catch (ErrorMessage e)
         {
@@ -368,6 +383,8 @@ public class Adapter
 
     private final GtpSynchronizer m_synchronizer;
 
+    private ScoringMethod m_rules;
+
     private Komi m_komi;
 
     private TimeSettings m_timeSettings;
@@ -429,6 +446,9 @@ public class Adapter
             register("kgs-genmove_cleanup", new GtpCallback() {
                     public void run(GtpCommand cmd) throws GtpError {
                         cmdGenmoveCleanup(cmd); } });
+        register("kgs-rules", new GtpCallback() {
+                public void run(GtpCommand cmd) throws GtpError {
+                    cmdRules(cmd); } });
         register("boardsize", new GtpCallback() {
                 public void run(GtpCommand cmd) throws GtpError {
                     cmdBoardsize(cmd); } });
@@ -591,6 +611,6 @@ public class Adapter
 
     private void synchronize() throws GtpError
     {
-        m_synchronizer.synchronize(m_board, m_komi, m_timeSettings);
+        m_synchronizer.synchronize(m_board, m_rules, m_komi, m_timeSettings);
     }
 }

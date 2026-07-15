@@ -16,13 +16,14 @@ import static net.sf.gogui.go.GoColor.WHITE_BLACK;
 import net.sf.gogui.go.GoPoint;
 import net.sf.gogui.go.Komi;
 import net.sf.gogui.go.Move;
+import net.sf.gogui.go.Score.ScoringMethod;
 import net.sf.gogui.util.ObjectUtil;
 
 /** Synchronizes a GTP engine with a Go board.
     Handles different capabilities of different engines.
     If GtpSynchronizer is used, no game state changing GTP commands (like
-    clear_board, play, undo, komi, time_settings) should be sent to this
-    engine outside this class. */
+    clear_board, play, undo, komi, time_settings, kgs-rules) should be sent
+    to this engine outside this class. */
 public class GtpSynchronizer
 {
     /** Callback that is called after each change in the engine's move
@@ -48,6 +49,7 @@ public class GtpSynchronizer
         m_isOutOfSync = true;
         m_komi = null;
         m_timeSettings = null;
+        m_rules = null;
     }
 
     /** Did the last GtpSynchronizer.synchronize() fail? */
@@ -56,7 +58,7 @@ public class GtpSynchronizer
         return m_isOutOfSync;
     }
 
-    public void init(ConstBoard board, Komi komi, TimeSettings timeSettings)
+    public void init(ConstBoard board, ScoringMethod rules, Komi komi, TimeSettings timeSettings)
         throws GtpError
     {
         initSupportedCommands();
@@ -66,7 +68,7 @@ public class GtpSynchronizer
         m_gtp.sendBoardsize(size);
         m_engineState = new Board(size);
         m_gtp.sendClearBoard(size);
-        sendGameInfo(komi, timeSettings);
+        sendGameInfo(rules, komi, timeSettings);
         ConstBoard targetState = computeTargetState(board);
         setup(targetState);
         ArrayList<Move> moves = new ArrayList<Move>();
@@ -76,15 +78,15 @@ public class GtpSynchronizer
         m_isOutOfSync = false;
     }
 
-    public void synchronize(ConstBoard board, Komi komi,
-                            TimeSettings timeSettings) throws GtpError
+    public void synchronize(ConstBoard board, ScoringMethod rules, Komi komi, TimeSettings timeSettings)
+        throws GtpError
     {
         int size = board.getSize();
         ConstBoard targetState = computeTargetState(board);
         if (m_engineState == null || size != m_engineState.getSize()
             || isSetupDifferent(targetState))
         {
-            init(board, komi, timeSettings);
+            init(board, rules, komi, timeSettings);
             return;
         }
         m_isOutOfSync = true;
@@ -101,17 +103,17 @@ public class GtpSynchronizer
                 // According to the GTP standard, undo may fail even if it is
                 // supported and there were moves played. In this case, we
                 // fall back to a full initialization.
-                init(board, komi, timeSettings);
+                init(board, rules, komi, timeSettings);
                 return;
             }
             // Send komi/time_settings before play commands, some engines
             // cannot handle them otherwise
-            sendGameInfo(komi, timeSettings);
+            sendGameInfo(rules, komi, timeSettings);
             play(moves);
             m_isOutOfSync = false;
         }
         else
-            init(board, komi, timeSettings);
+            init(board, rules, komi, timeSettings);
     }
 
     /** Send human move to engine.
@@ -171,6 +173,8 @@ public class GtpSynchronizer
     private boolean m_isSupportedUndo;
 
     private boolean m_isSupportedSetup;
+
+    private ScoringMethod m_rules;
 
     private Komi m_komi;
 
@@ -321,8 +325,24 @@ public class GtpSynchronizer
         }
     }
 
-    private void sendGameInfo(Komi komi, TimeSettings timeSettings)
+    private void sendGameInfo(ScoringMethod rules, Komi komi, TimeSettings timeSettings)
     {
+        if (! ObjectUtil.equals(rules, m_rules))
+        {
+            m_rules = rules;
+            if (m_gtp.isSupported("kgs-rules"))
+            {
+                try
+                {
+                    if (rules == null)
+                        rules = ScoringMethod.AREA;
+                    m_gtp.send("kgs-rules " + rules.toString());
+                }
+                catch (GtpError e)
+                {
+                }
+            }
+        }
         if (! ObjectUtil.equals(komi, m_komi))
         {
             m_komi = komi;

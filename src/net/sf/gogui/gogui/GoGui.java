@@ -3432,7 +3432,7 @@ public class GoGui
             try
             {
                 ConstGameInfo info = getGameInfo();
-                m_gtp.initSynchronize(getBoard(), info.getKomi(),
+                m_gtp.initSynchronize(getBoard(), info.parseRules(), info.getKomi(),
                                       info.getTimeSettings());
             }
             catch (GtpError error)
@@ -4360,7 +4360,7 @@ public class GoGui
         try
         {
             ConstGameInfo info = getGameInfo();
-            m_gtp.synchronize(getBoard(), info.getKomi(),
+            m_gtp.synchronize(getBoard(), info.parseRules(), info.getKomi(),
                               info.getTimeSettings());
         }
         catch (GtpError e)
